@@ -1,0 +1,634 @@
+<!doctype html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#060b19">
+  <meta name="description" content="Coach David teaches practical digital skills that help people build sustainable affiliate businesses.">
+  <title>Coach David — Affiliate Marketer</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            ink: "#F9FAFB",
+            panel: "#FFFFFF",
+            paper: "#060B19",
+            mist: "#6B7280",
+            emerald: "#2B4BFF",
+            gold: "#FFDE00",
+            brand: {
+              navy: "#060B19",
+              yellow: "#FFDE00",
+              blue: "#2B4BFF",
+              gray: "#F8F9FA",
+              darkgray: "#1E1E1E"
+            }
+          },
+          fontFamily: {
+            heading: ["Inter", "sans-serif"],
+            body: ["Inter", "sans-serif"],
+            mono: ["Inter", "sans-serif"]
+          }
+        }
+      }
+    };
+  </script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+  <style>
+    :root {
+      color-scheme: light;
+      --ink: #060b19;
+      --panel: #ffffff;
+      --line: rgba(6, 11, 25, .1);
+      --muted: #4b5563;
+      --green: #2b4bff;
+      --gold: #ffde00;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: #f8f9fa;
+      color: #1e1e1e;
+      font-family: Inter, Arial, sans-serif;
+      -webkit-font-smoothing: antialiased;
+    }
+    a { color: inherit; text-decoration: none; }
+    button, input, select, textarea { font: inherit; }
+    button, a, input, select, textarea { -webkit-tap-highlight-color: transparent; }
+    ::selection { color: #060b19; background: #ffde00; }
+    :focus-visible { outline: 3px solid #2b4bff; outline-offset: 3px; }
+    .section-wrap { width: min(1120px, calc(100% - 48px)); margin-inline: auto; }
+    .section-space { padding-block: 88px; }
+    .font-heading { font-family: Inter, Arial, sans-serif !important; letter-spacing: -.035em !important; }
+    .section-title { color: #060b19; font: 800 clamp(2rem, 4vw, 3rem)/1.15 Inter, Arial, sans-serif; letter-spacing: -.04em; }
+    #hero-headline { min-height: 150px; color: #060b19; font: 800 clamp(2.4rem, 5vw, 3.5rem)/1.15 Inter, Arial, sans-serif; letter-spacing: -.045em; }
+    .typing-active::after { content: "|"; color: #2b4bff; animation: blink 1s step-start infinite; }
+    @keyframes blink { 50% { opacity: 0; } }
+    .section-copy { color: #4b5563; line-height: 1.8; }
+    .surface { border: 1px solid #e5e7eb; border-radius: 0 !important; background: #ffffff; box-shadow: 0 2px 6px rgba(6,11,25,.04); }
+    .top-glow { background: #ffffff; }
+    .btn-primary, .btn-quiet {
+      display: inline-flex; justify-content: center; align-items: center; gap: 10px;
+      min-height: 48px; border-radius: 0; padding: 0 20px;
+      font-size: 13px; font-weight: 700; transition: .2s ease;
+    }
+    .btn-primary { background: #ffde00; color: #060b19; }
+    .btn-primary:hover { background: #f3d400; transform: translateY(-2px); }
+    .btn-quiet { border: 2px solid #060b19; color: #060b19; }
+    .btn-quiet:hover { background: #060b19; border-color: #060b19; color: #ffffff; }
+    .hero-grid { display: grid; grid-template-columns: minmax(0, 1.08fr) minmax(320px, .82fr); gap: 64px; align-items: center; }
+    .portrait-card {
+      position: relative; overflow: hidden; background: transparent;
+    }
+    .portrait-card img { position: relative; display: block; width: 100%; aspect-ratio: 4 / 4.7; object-fit: cover; object-position: center 25%; filter: grayscale(100%); transition: filter .7s ease; box-shadow: 0 18px 40px rgba(6,11,25,.13); }
+    .portrait-card:hover img { filter: grayscale(0); }
+    .portrait-card::after { content: none; }
+    .portrait-fallback { position: absolute; inset: 0 0 auto; display: grid; aspect-ratio: 4 / 4.7; place-items: center; color: #2b4bff; font: 800 118px Inter, Arial, sans-serif; }
+    .portrait-card img:not([src]), .portrait-card img[src=""] { display: none; }
+    .hero-orb { display: none; }
+    .dark-band { background: #060b19; color: #ffffff; }
+    .dark-band .section-title, .dark-band h2, .dark-band h3 { color: #ffffff; }
+    .dark-band .section-copy { color: #d1d5db; }
+    .dark-band .text-slate-100, .dark-band .text-slate-200, .dark-band .text-slate-300 { color: #e5e7eb !important; }
+    .dark-band .text-slate-400, .dark-band .text-slate-500 { color: #9ca3af !important; }
+    .dark-band .text-emerald-100, .dark-band .text-emerald-200, .dark-band .text-emerald-300 { color: #ffde00 !important; }
+    .dark-band .surface { border-color: #e5e7eb; background: #ffffff; color: #1e1e1e; }
+    .dark-band .surface h3, .dark-band .surface .font-heading { color: #060b19; }
+    .dark-band .surface .text-slate-100, .dark-band .surface .text-slate-200, .dark-band .surface .text-slate-300 { color: #374151 !important; }
+    .dark-band .surface .text-slate-400, .dark-band .surface .text-slate-500 { color: #6b7280 !important; }
+    .dark-band .filter-tab[aria-pressed="true"] { border-color: #ffde00; color: #ffde00; }
+    .stat-cell { padding: 25px 20px; border-right: 1px solid rgba(255,255,255,.15); }
+    .stat-cell:last-child { border-right: 0; }
+    .dark-band .stat-cell { border-color: rgba(255,255,255,.15); }
+    .stat-value { display: block; color: #ffde00; font: 800 clamp(1.3rem, 2.5vw, 1.8rem)/1.2 Inter, Arial, sans-serif; letter-spacing: -.03em; }
+    .stat-label { display: block; margin-top: 9px; color: #d1d5db; font-size: 11px; line-height: 1.55; }
+    .pillar-card, .case-card, .program-card, .quote-card, .resource-card { transition: border-color .25s ease, box-shadow .25s ease, transform .25s ease; }
+    .pillar-card:hover, .case-card:hover, .program-card:hover, .quote-card:hover, .resource-card:hover { border-color: #2b4bff; box-shadow: 0 16px 34px rgba(6,11,25,.12); transform: translateY(-4px); }
+    .icon-box { display: grid; place-items: center; width: 42px; height: 42px; color: #2b4bff; }
+    .filter-tab { border: 0; border-bottom: 2px solid transparent; border-radius: 0; padding: 9px 8px; color: #d1d5db; font-size: 12px; transition: .2s ease; }
+    .filter-tab:hover { color: #ffffff; }
+    .filter-tab[aria-pressed="true"] { border-color: #ffde00; color: #ffde00; }
+    .metric-chip { display: inline-flex; align-items: center; color: #2b4bff; font: 700 11px Inter, Arial, sans-serif; }
+    .case-card[hidden] { display: none; }
+    .timeline-line { position: absolute; top: 21px; left: 12%; right: 12%; height: 1px; background: rgba(148,163,184,.2); }
+    .phase-number { display: inline-flex; align-items: center; min-height: 42px; color: #2b4bff; font: 700 13px Inter, Arial, sans-serif; }
+    .quote-mark { color: #2b4bff; font: 700 42px/1 Inter, Arial, sans-serif; }
+    .form-field {
+      width: 100%; min-height: 48px; border: 1px solid #d1d5db; border-radius: 0;
+      background: #ffffff; color: #1e1e1e; padding: 12px 13px; font-size: 13px;
+    }
+    .form-field::placeholder { color: #6b7280; }
+    .form-field:focus { border-color: #2b4bff; outline: 2px solid rgba(43,75,255,.15); }
+    textarea.form-field { min-height: 132px; resize: vertical; }
+    select.form-field { color-scheme: light; }
+    .modal-panel button { border-color: #d1d5db; color: #4b5563; }
+    .hover\:text-emerald-200:hover { color: #2b4bff !important; }
+    .dark-band .hover\:text-emerald-200:hover { color: #ffde00 !important; }
+    .modal-backdrop { position: fixed; inset: 0; z-index: 80; display: grid; place-items: center; padding: 24px; background: rgba(2,6,12,.82); backdrop-filter: blur(8px); }
+    .modal-backdrop.hidden { display: none; }
+    .modal-panel { width: min(640px, 100%); max-height: min(85vh, 780px); overflow-y: auto; }
+    .modal-panel:focus { outline: none; }
+    .reveal { opacity: 0; transform: translateY(40px); transition: opacity .8s cubic-bezier(.16,1,.3,1), transform .8s cubic-bezier(.16,1,.3,1); }
+    .reveal.slide-in-left { transform: translateX(-40px); }
+    .reveal.slide-in-right { transform: translateX(40px); }
+    .reveal.delay-100 { transition-delay: 100ms; }
+    .reveal.delay-200 { transition-delay: 200ms; }
+    .reveal.is-visible { opacity: 1; transform: translate(0); }
+    .pillar-card:nth-child(2), .case-card:nth-child(2), .program-card:nth-child(2), .quote-card:nth-child(2), .resource-card:nth-child(2) { transition-delay: 100ms; }
+    .pillar-card:nth-child(3), .case-card:nth-child(3), .program-card:nth-child(3), .quote-card:nth-child(3), .resource-card:nth-child(3) { transition-delay: 200ms; }
+    .text-paper, .text-slate-100, .text-slate-200, .text-slate-300 { color: #1e1e1e !important; }
+    .text-slate-400, .text-slate-500 { color: #6b7280 !important; }
+    .text-emerald-100, .text-emerald-200, .text-emerald-300 { color: #2b4bff !important; }
+    .bg-emerald\/5 { background: rgba(43,75,255,.06) !important; }
+    .border-emerald\/20, .border-emerald\/30, .border-emerald\/50 { border-color: rgba(43,75,255,.25) !important; }
+    .dark-band .text-paper, .dark-band .text-slate-100, .dark-band .text-slate-200, .dark-band .text-slate-300 { color: #ffffff !important; }
+    .dark-band .text-emerald-100, .dark-band .text-emerald-200, .dark-band .text-emerald-300 { color: #ffde00 !important; }
+    .dark-band .surface .text-paper, .dark-band .surface .text-slate-100, .dark-band .surface .text-slate-200, .dark-band .surface .text-slate-300 { color: #1e1e1e !important; }
+    .dark-band .surface .text-emerald-100, .dark-band .surface .text-emerald-200, .dark-band .surface .text-emerald-300 { color: #2b4bff !important; }
+    .dark-band .surface .metric-chip { color: #2b4bff; }
+    .dark-band .surface .icon-box { color: #2b4bff; }
+    @media (prefers-reduced-motion: reduce) {
+      .typing-active::after { animation: none; }
+    }
+    .demo-note { border-bottom: 1px solid #f3e7a1; background: #fff9d9; color: #1e1e1e; }
+    .skip-link { position: absolute; z-index: 100; left: 12px; top: 12px; transform: translateY(-150%); background: #f9fafb; color: #0b0f19; padding: 10px 14px; }
+    .skip-link:focus { transform: translateY(0); }
+    @media (max-width: 860px) {
+      .hero-grid { grid-template-columns: minmax(0,1fr) minmax(280px,.8fr); gap: 38px; }
+      .section-space { padding-block: 72px; }
+      .timeline-line { left: 10%; right: 10%; }
+    }
+    @media (max-width: 640px) {
+      .section-wrap { width: min(100% - 36px, 520px); }
+      .section-space { padding-block: 64px; }
+      .hero-grid { grid-template-columns: 1fr; gap: 36px; }
+      .portrait-card { min-height: 405px; }
+      .stat-cell { padding: 18px 12px; }
+      .stat-cell:nth-child(2) { border-right: 0; }
+      .stat-cell:nth-child(-n+2) { border-bottom: 1px solid var(--line); }
+      .timeline-line { top: 0; bottom: 0; left: 20px; right: auto; width: 1px; height: auto; background: rgba(148,163,184,.2); }
+      .modal-backdrop { padding: 14px; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
+      .reveal { opacity: 1; transform: none; }
+    }
+    :root {
+      color-scheme: dark;
+      --ink: #0b0f19;
+      --panel: #111827;
+      --line: rgba(148,163,184,.15);
+      --muted: #aeb8c7;
+      --green: #10b981;
+      --gold: #f59e0b;
+    }
+    body { background: #0b0f19; color: #f9fafb; font-family: Arial, Helvetica, sans-serif; }
+    main { display: flex; flex-direction: column; }
+    #top { order: 1; background: radial-gradient(ellipse at 68% 4%, rgba(16,185,129,.1), transparent 36%), #0b0f19; }
+    #metrics { order: 2; background: #0b0f19; }
+    #about { order: 3; background: #0b0f19; }
+    #case-studies { order: 5; background: #0e1420; }
+    #methodology { order: 6; background: #0b0f19; }
+    #advisory { order: 7; background: #0e1420; }
+    #results { order: 8; background: #0b0f19; }
+    #resources { order: 9; background: #0e1420; }
+    #inquiry { order: 10; background: #0b0f19; }
+    .section-space { padding-block: 112px; }
+    .font-heading { font-family: Georgia, "Times New Roman", serif !important; font-weight: 400 !important; letter-spacing: -.025em !important; }
+    .section-title { color: #f9fafb; font: 400 clamp(2rem,4vw,3.1rem)/1.15 Georgia, "Times New Roman", serif; letter-spacing: -.025em; }
+    #hero-headline { min-height: 0; color: #f9fafb; font: 400 1rem/1.625 Arial, Helvetica, sans-serif; letter-spacing: normal; }
+    @media (min-width: 768px) { #hero-headline { font-size: 1.125rem; } }
+    .surface { border: 1px solid rgba(148,163,184,.15); border-radius: 8px !important; background: #111827; box-shadow: none; }
+    .dark-band { background: #0b0f19; color: #f9fafb; }
+    .dark-band .section-title, .dark-band h2, .dark-band h3 { color: #f9fafb; }
+    .dark-band .surface { border-color: rgba(148,163,184,.15); background: #111827; color: #f9fafb; }
+    .dark-band .surface h3, .dark-band .surface .font-heading { color: #f9fafb; }
+    .portfolio-header { background: rgba(11,15,25,.94) !important; }
+    .text-gray-700 { color: #cbd5e1 !important; }
+    .hero-grid { grid-template-columns: minmax(0,1fr); gap: 42px; align-items: start; }
+    .hero-intro-card { padding: clamp(24px,5vw,48px); border: 1px solid rgba(148,163,184,.18); border-radius: 12px; background: #111827; text-align: center; transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease; }
+    .hero-intro-card:hover { transform: translateY(-3px); border-color: rgba(16,185,129,.35); box-shadow: 0 18px 42px rgba(0,0,0,.32); }
+    .top-glow { background: transparent; }
+    .btn-primary, .btn-quiet { border-radius: 6px; }
+    .btn-primary { background: #10b981; color: #062016; }
+    .btn-primary:hover { background: #34d399; }
+    .btn-quiet { border-color: rgba(203,213,225,.2); color: #e5e7eb; }
+    .btn-quiet:hover { border-color: rgba(110,231,183,.55); background: transparent; color: #a7f3d0; }
+    .portrait-card { min-height: 455px; overflow: hidden; border: 1px solid rgba(148,163,184,.22); border-radius: 10px; background: linear-gradient(160deg,#1d3440,#14222b 44%,#1b2532); }
+    .portrait-card img { position: absolute; inset: 0; width: 100%; height: 100%; aspect-ratio: auto; object-fit: cover; object-position: center 10%; filter: none; opacity: .8; box-shadow: none; }
+    .portrait-card:hover img { filter: none; }
+    .portrait-card::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg,rgba(8,15,24,.04) 18%,rgba(8,15,24,.18) 45%,rgba(8,15,24,.95) 100%); pointer-events: none; }
+    .portrait-card > div.mt-4 { position: absolute; inset: auto 0 0; z-index: 10; margin-top: 0; padding: 20px; }
+    .portrait-card .text-brand-navy { color: #f9fafb !important; }
+    .portrait-card .text-gray-600, .portrait-card .text-gray-500 { color: #cbd5e1 !important; }
+    .social-brand-icon { width: 1rem; text-align: center; font-size: 14px; }
+    #footer-socials .social-brand-icon { font-size: 16px; }
+    .portrait-fallback { color: rgba(167,243,208,.72); font: 500 118px Georgia, "Times New Roman", serif; }
+    .icon-box { color: #6ee7b7; }
+    .filter-tab { border-radius: 5px; }
+    .filter-tab[aria-pressed="true"] { border-color: rgba(16,185,129,.35); background: rgba(16,185,129,.1); color: #a7f3d0; }
+    .metric-chip { border: 1px solid rgba(16,185,129,.27); border-radius: 4px; background: rgba(16,185,129,.08); color: #a7f3d0; padding: 5px 8px; }
+    .phase-number { display: grid; width: 42px; min-height: 42px; place-items: center; border: 1px solid rgba(16,185,129,.4); border-radius: 50%; background: #0d171b; color: #6ee7b7; }
+    .timeline-line { background: linear-gradient(90deg,rgba(16,185,129,.45),rgba(148,163,184,.12)); }
+    .stat-value { color: #f9fafb; font: 500 clamp(1.3rem,2.5vw,1.8rem)/1.2 Arial,Helvetica,sans-serif; }
+    .stat-label { color: #aeb8c7; }
+    .form-field { border-color: rgba(148,163,184,.22); border-radius: 5px; background: rgba(8,13,22,.55); color: #f9fafb; }
+    .form-field::placeholder { color: #7d8999; }
+    .form-field:focus { border-color: rgba(16,185,129,.7); outline-color: rgba(16,185,129,.15); }
+    select.form-field { color-scheme: dark; }
+    .modal-panel button { border-color: rgba(148,163,184,.22); color: #cbd5e1; }
+    .text-paper, .text-brand-navy, .text-slate-100, .text-slate-200, .text-slate-300 { color: #f9fafb !important; }
+    .text-slate-400, .text-slate-500 { color: #aeb8c7 !important; }
+    .text-brand-blue, .text-emerald-100, .text-emerald-200, .text-emerald-300 { color: #a7f3d0 !important; }
+    .text-brand-yellow, .text-gold { color: #f59e0b !important; }
+    .bg-emerald\/5 { background: rgba(16,185,129,.08) !important; }
+    .border-emerald\/20, .border-emerald\/30, .border-emerald\/50 { border-color: rgba(16,185,129,.3) !important; }
+    .bg-white, .bg-brand-gray, .bg-ink { background: #0b0f19 !important; }
+    .dark-band .text-paper, .dark-band .text-brand-navy, .dark-band .text-slate-100, .dark-band .text-slate-200, .dark-band .text-slate-300 { color: #f9fafb !important; }
+    .dark-band .surface .text-slate-400, .dark-band .surface .text-slate-500 { color: #aeb8c7 !important; }
+    .dark-band .surface .text-emerald-100, .dark-band .surface .text-emerald-200, .dark-band .surface .text-emerald-300 { color: #a7f3d0 !important; }
+    .demo-note { border-color: rgba(245,158,11,.3); background: rgba(245,158,11,.07); color: #fcd34d; }
+    .section-space { padding-block: 112px; }
+    @media (max-width: 860px) { .section-space { padding-block: 84px; } }
+    @media (max-width: 640px) { .section-space { padding-block: 72px; } }
+  </style>
+</head>
+<body class="font-body">
+  <a class="skip-link" href="#main">Skip to content</a>
+  <div id="demo-banner" class="demo-note px-4 py-2 text-center text-xs leading-relaxed"></div>
+  <header class="portfolio-header sticky top-0 z-50 border-b border-white/10 backdrop-blur-xl">
+    <div class="section-wrap flex h-[72px] items-center justify-between gap-5">
+      <a id="brand" class="flex shrink-0 items-center gap-3" href="#top" aria-label="Go to homepage"></a>
+      <a id="header-cta" class="btn-primary !min-h-[48px] !px-6 text-xs sm:text-sm" href="#inquiry">Work With Me <i data-lucide="arrow-up-right" class="h-4 w-4"></i></a>
+    </div>
+  </header>
+
+  <main id="main">
+    <section id="top" class="top-glow relative overflow-hidden pb-12 pt-16 sm:pt-24">
+      <div class="section-wrap">
+        <div class="hero-grid">
+          <div class="reveal slide-in-right delay-200 relative mx-auto w-full max-w-sm">
+            <div class="hero-orb"></div>
+            <div class="portrait-card">
+              <div id="portrait-fallback" class="portrait-fallback" aria-hidden="true"></div>
+              <img id="portrait-image" alt="" loading="eager">
+              <div class="mt-4">
+                <div class="flex items-baseline justify-between gap-3">
+                  <div><p id="portrait-name" class="font-heading text-xl font-extrabold tracking-tight text-brand-navy"></p><p id="portrait-role" class="mt-1 text-xs text-gray-600"></p></div>
+                  <span class="text-xs text-gray-500">Independent advisor</span>
+                </div>
+                <div class="mt-4 border-t border-gray-200 pt-3">
+                  <p id="focus-status" class="text-xs text-gray-600"></p>
+                  <div id="platforms" class="mt-2 text-xs text-gray-600"></div>
+                </div>
+              </div>
+            </div>
+            <div class="mt-6 flex flex-col items-start gap-5 px-0 sm:flex-row sm:items-center sm:gap-7 lg:mt-7 lg:px-3">
+              <a id="advisory-cta" class="btn-primary min-h-[54px] w-full justify-center px-8 py-4 text-sm sm:w-auto" href="#inquiry">Connect with me <i data-lucide="message-circle" class="h-4 w-4"></i></a>
+              <div id="hero-socials" class="flex w-full flex-wrap items-center justify-center gap-x-5 gap-y-3 px-4 sm:w-auto sm:flex-1 sm:pl-6 sm:pr-2"></div>
+            </div>
+          </div>
+          <div class="hero-intro-card reveal slide-in-left mx-auto w-full max-w-3xl">
+            <h1 id="hero-headline" class="mx-auto max-w-3xl text-center text-base leading-relaxed text-slate-300 md:text-lg"></h1>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="about" class="section-space bg-brand-gray">
+      <div class="section-wrap max-w-4xl">
+        <div class="reveal mb-12 text-center">
+          <h2 id="about-title" class="section-title"></h2>
+          <div class="mx-auto mt-6 h-1 w-12 bg-brand-blue"></div>
+        </div>
+        <div class="surface reveal delay-100 space-y-5 border border-gray-100 p-8 text-base leading-relaxed text-gray-700 shadow-xl md:p-12 md:text-lg">
+          <p id="about-lead" class="text-2xl font-bold text-brand-navy"></p>
+          <div id="about-story" class="space-y-5"></div>
+          <div class="dark-band relative mt-8 border-l-4 border-brand-yellow p-7 md:p-9">
+            <p id="about-quote" class="relative z-10 text-lg italic leading-relaxed text-white md:text-xl"></p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="metrics" class="dark-band px-6 py-12 md:px-12 md:py-16" aria-label="Illustrative performance figures">
+      <div class="section-wrap">
+        <div class="flex flex-wrap items-center justify-between gap-2 border-b border-white/10 py-3">
+          <span class="text-xs text-slate-300">Selected figures</span>
+          <span id="stats-note" class="text-[10px] text-slate-500"></span>
+        </div>
+        <div id="stats-grid" class="grid grid-cols-2 sm:grid-cols-4"></div>
+      </div>
+    </section>
+
+    <section id="inquiry" class="section-space bg-brand-gray">
+      <div class="section-wrap">
+        <div class="reveal grid gap-10 md:grid-cols-[.8fr_1.2fr] md:gap-20">
+          <div>
+            <h2 id="contact-title" class="section-title"></h2>
+            <p id="contact-intro" class="section-copy mt-4 text-sm"></p>
+            <div id="contact-details" class="mt-8 space-y-5"></div>
+            <p id="availability-note" class="mt-8 border-l border-emerald/50 pl-4 text-xs leading-6 text-slate-400"></p>
+          </div>
+          <div class="surface p-5 sm:p-8">
+            <form id="inquiry-form" novalidate>
+              <div class="grid gap-5 sm:grid-cols-2">
+                <label class="block"><span class="mb-2 block text-xs font-medium text-slate-200">Full name <span class="text-emerald-300">*</span></span><input class="form-field" name="name" autocomplete="name" required minlength="2" placeholder="Your name"></label>
+                <label class="block"><span class="mb-2 block text-xs font-medium text-slate-200">Email address <span class="text-emerald-300">*</span></span><input class="form-field" name="email" type="email" autocomplete="email" required placeholder="you@company.com"></label>
+                <label class="block"><span class="mb-2 block text-xs font-medium text-slate-200">Current experience <span class="text-emerald-300">*</span></span><select id="experience-select" class="form-field" name="experience" required></select></label>
+                <label class="block"><span class="mb-2 block text-xs font-medium text-slate-200">Program of interest <span class="text-emerald-300">*</span></span><select id="program-select" class="form-field" name="program" required></select></label>
+                <label class="block sm:col-span-2"><span class="mb-2 block text-xs font-medium text-slate-200">Goals / message <span class="text-emerald-300">*</span></span><textarea class="form-field" name="message" required minlength="20" placeholder="Tell me what you're building and where you want to go."></textarea></label>
+              </div>
+              <div class="mt-5 flex flex-wrap items-center justify-between gap-4">
+                <p class="max-w-xs text-[10px] leading-5 text-slate-500">This demo form shows a local confirmation only. No information is sent or stored.</p>
+                <button class="btn-primary" type="submit">Send inquiry <i data-lucide="arrow-right" class="h-4 w-4"></i></button>
+              </div>
+              <p id="form-status" class="mt-4 hidden rounded border border-emerald/20 bg-emerald/5 px-4 py-3 text-sm text-emerald-100" role="status" aria-live="polite" tabindex="-1"></p>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="dark-band border-t border-white/10 py-8">
+    <div class="section-wrap flex flex-col gap-5 md:flex-row md:items-center md:justify-between">
+      <div><a id="footer-brand" class="font-heading text-sm font-semibold text-slate-100" href="#top"></a><p class="mt-2 max-w-xl text-[10px] leading-5 text-slate-500"><span id="copyright"></span> <span id="disclosure"></span></p></div>
+      <div id="footer-socials" class="flex items-center gap-4"></div>
+    </div>
+  </footer>
+
+  <script>
+    const PORTFOLIO_DATA = {
+      demoDisclosure: "DEMO PORTFOLIO — Identity, performance figures, campaign examples and client quotes on this page are illustrative, not verified claims. Replace or substantiate them before publication.",
+      person: {
+        name: "Coach David",
+        monogram: "",
+        role: "Affiliate Growth Strategist & Educator",
+        headline: "I’m Coach David, an affiliate marketer with over $15,000 in personal sales and 3,000+ students in training across Africa. I teach practical digital skills that help everyday people build sustainable affiliate businesses they can actually rely on and earn from.",
+        portrait: "assets/coach-david.png",
+        focus: "Taking select advisory conversations",
+        status: "Available for Q1 2027",
+        platforms: ["PartnerStack", "impact.com", "ClickBank", "Selar"],
+        social: [
+          { label: "Facebook", url: "https://www.facebook.com/search/top/?q=affiliate%20marketing", icon: "facebook-f" },
+          { label: "X", url: "https://x.com/search?q=affiliate%20marketing", icon: "x-twitter" },
+          { label: "WhatsApp", url: "https://wa.me/15550100123", icon: "whatsapp" },
+          { label: "Instagram", url: "https://www.instagram.com/explore/tags/affiliatemarketing/", icon: "instagram" }
+        ]
+      },
+      stats: [
+        { value: "$1.4M+", label: "Partner revenue attributed" },
+        { value: "2,800+", label: "Marketers reached through education" },
+        { value: "4.2×", label: "Median ROAS across selected campaigns" },
+        { value: "6+", label: "Years in affiliate growth" }
+      ],
+      statsNote: "Illustrative figures; attribution and sample scope should be documented before publishing.",
+      about: {
+        title: "Experience earned in the campaign trenches.",
+        lead: "Hi, ambitious affiliate marketer.",
+        quote: "A click is only the beginning. Sustainable growth comes from earning trust, guiding a good decision, and staying useful after the sale.",
+        story: [
+          "My work began on the operator side: buying media, evaluating offers and learning what happens when a campaign meets real people. That experience taught me that a strong affiliate business is built on more than a clever hook or a temporary traffic advantage.",
+          "Over time, I moved from running individual campaigns to teaching the systems behind them. Today I work with marketers and partner teams to make offer selection, audience education, measurement and follow-up function as one coherent operating model.",
+          "My approach is deliberately durable: position offers honestly, acquire traffic with a clear view of its economics, then earn the next conversation through useful content and thoughtful retention. Compliance isn't a footnote — it's part of the strategy."
+        ],
+      },
+      caseStudies: [
+        {
+          id: "creator-education", category: "Organic Content", vertical: "Creator education",
+          title: "A focused content engine for a specialist creator",
+          metric: "+312% qualified inquiries",
+          summary: "A searchable education library turned fragmented social attention into a measurable partner funnel.",
+          challenge: "A creator with strong subject expertise relied on inconsistent social posts and had no useful way to distinguish casual engagement from genuine buying intent.",
+          strategy: "We mapped recurring audience questions to a practical content calendar, then used organic search and short-form video to route high-intent visitors into a permission-based email series.",
+          architecture: "Search and social content → comparison guide → opt-in learning sequence → disclosed partner recommendation.",
+          outcome: "Qualified partner inquiries increased 312% over the prior quarter in this illustrative sample, while the creator retained control of the audience relationship."
+        },
+        {
+          id: "saas-paid", category: "Paid Acquisition", vertical: "B2B software",
+          title: "Improving payback on a SaaS partner campaign",
+          metric: "4.8× attributed ROAS",
+          summary: "Intent-led segmentation and a tighter landing-page promise improved paid traffic efficiency.",
+          challenge: "Rising search costs and generic messaging made it difficult to identify which segments produced retained subscribers rather than low-quality trials.",
+          strategy: "We separated branded, competitor and problem-aware search intent, added negative-keyword controls and aligned each ad group to a distinct proof-led landing page.",
+          architecture: "Paid search → segment-specific explainer → disclosed partner trial → consent-based onboarding and usage education.",
+          outcome: "The illustrative campaign reached 4.8× attributed ROAS over a 90-day measurement window, using the program's reported conversion data and documented spend."
+        },
+        {
+          id: "wellness-funnel", category: "Funnel Optimization", vertical: "Wellness",
+          title: "Making a wellness comparison guide easier to act on",
+          metric: "+38% conversion lift",
+          summary: "Clearer comparison criteria helped visitors find the right next step without overstating product claims.",
+          challenge: "Readers reached a long comparison page but struggled to understand how the products differed and which claims were independently supported.",
+          strategy: "We reorganized the page around transparent selection criteria, added plain-language disclosures and tested a concise recommendation summary against the original layout.",
+          architecture: "Educational article → criteria-based comparison → transparent affiliate disclosure → merchant product detail.",
+          outcome: "The revised page produced a 38% illustrative lift in outbound partner conversions over the six-week test, without changing traffic volume."
+        },
+        {
+          id: "finance-organic", category: "Organic Content", vertical: "Personal finance",
+          title: "A trust-first referral path for finance education",
+          metric: "2.1× email engagement",
+          summary: "A practical newsletter series helped readers understand product fit before following a referral link.",
+          challenge: "A finance educator's list was growing, but product recommendations felt disconnected from the educational content that initially earned subscriber trust.",
+          strategy: "We built a five-part fundamentals sequence, documented the editorial rationale for each recommendation and separated education from promotional messages.",
+          architecture: "Organic newsletter signup → fundamentals series → product-fit worksheet → clearly disclosed referral resource.",
+          outcome: "The illustrative nurture sequence delivered 2.1× the prior campaign's click engagement and reduced unsubscribes during promotional sends."
+        },
+        {
+          id: "home-paid", category: "Paid Acquisition", vertical: "Home services",
+          title: "Balancing local lead quality with acquisition cost",
+          metric: "−27% cost per qualified lead",
+          summary: "Geographic exclusions and clearer qualification criteria reduced wasted spend for a partner referral program.",
+          challenge: "A home-services publisher was paying for out-of-area and low-readiness leads that rarely advanced through partner intake.",
+          strategy: "We refined location targeting, introduced a short needs assessment and shifted optimization toward accepted lead events instead of raw form submissions.",
+          architecture: "Local paid search → service-area check → needs assessment → partner-matched referral with consent.",
+          outcome: "Cost per partner-accepted lead fell 27% in this illustrative eight-week cohort; the acceptance definition was held constant during the comparison."
+        },
+        {
+          id: "course-optimization", category: "Funnel Optimization", vertical: "Online learning",
+          title: "Reducing friction in a course discovery funnel",
+          metric: "+24% checkout starts",
+          summary: "A focused diagnostic improved the handoff from course evaluation to an affiliate merchant's checkout.",
+          challenge: "Prospective learners were reading detailed course reviews but abandoning before reaching the provider's enrollment flow.",
+          strategy: "We surfaced key fit criteria earlier, simplified the comparison table for mobile and added a short orientation video with a clear disclosure.",
+          architecture: "Search review → mobile-first comparison → course-fit orientation → disclosed provider checkout.",
+          outcome: "Checkout starts rose 24% in the illustrative test period; the result was measured on the publisher's outbound click events."
+        }
+      ],
+      methodology: {
+        title: "A repeatable system, not a bag of tactics.",
+        intro: "The framework moves from commercial fundamentals to audience acquisition and then the assets that compound trust. Each phase has a clear decision gate before the next investment.",
+        phases: [
+          { number: "01", title: "Offer auditing & high-commission selection", text: "Assess partner fit, customer value, commission terms, conversion evidence and compliance risk before committing traffic." },
+          { number: "02", title: "Authority content & traffic acquisition", text: "Build credible education around real audience intent, then choose organic or paid distribution that fits the economics." },
+          { number: "03", title: "Conversion assets & automated follow-up", text: "Connect useful pre-sell content to a transparent recommendation and permission-based retention with measurable outcomes." }
+        ]
+      },
+      programs: {
+        title: "A focused way to work together.",
+        intro: "Engagements begin with fit, goals and existing evidence. The first conversation is a working discussion, not a high-pressure sales call.",
+        items: [
+          {
+            title: "1-on-1 Executive Mentorship", audience: "For active marketers scaling campaigns",
+            description: "A direct advisory partnership for operators who already have live campaigns and want clearer decisions on growth, economics and team execution.",
+            deliverables: ["Private strategy sessions", "Campaign and funnel reviews", "Measurement priorities and action plan"],
+            value: "Individual advisory", icon: "user-round"
+          },
+          {
+            title: "Affiliate Accelerator Cohort", audience: "For marketers ready for structured implementation",
+            description: "A small-group learning environment that pairs guided curriculum with peer feedback and practical campaign audits.",
+            deliverables: ["Live group workshops", "Structured implementation curriculum", "Peer review and campaign audit sessions"],
+            value: "Cohort mentorship", icon: "users-round"
+          },
+          {
+            title: "Brand & Vendor Consulting", audience: "For businesses building affiliate programs",
+            description: "Strategic support for teams refining partner positioning, onboarding, enablement and the quality of their publisher ecosystem.",
+            deliverables: ["Program and partner journey review", "Publisher enablement recommendations", "Measurement and compliance framework"],
+            value: "Business consulting", icon: "building-2"
+          }
+        ]
+      },
+      testimonials: {
+        title: "Progress built on better decisions.",
+        note: "The names, quotes and outcomes below are illustrative composite examples, not real testimonials. Publish only with accurate attribution and explicit client approval.",
+        items: [
+          { name: "Maya R.", niche: "Creator education · Toronto", result: "First 100 qualified partner referrals", quote: "The biggest shift was learning to design around what my audience actually needed to know. The recommendations feel like a natural extension of the teaching now." },
+          { name: "Andre W.", niche: "B2B software · Austin", result: "Cut wasted acquisition spend by 27%", quote: "We finally had a shared way to evaluate traffic quality. That made the campaign review useful for the whole team, not just the person managing ads." },
+          { name: "Priya S.", niche: "Personal finance · London", result: "Built a 5-part evergreen nurture journey", quote: "I came in looking for a funnel tweak. We rebuilt the sequence around transparency and reader fit, and the business is much easier to understand now." }
+        ]
+      },
+      resources: {
+        title: "Practical notes for the work.",
+        intro: "A small library of frameworks to use in your next campaign review. Links open relevant public resources; these are demo titles, not published work attributed to David.",
+        items: [
+          { type: "Field guide · 12 min", title: "The partner offer scorecard", text: "A practical set of criteria for reviewing product fit, terms, proof and risk before you scale a recommendation.", icon: "clipboard-check", url: "https://www.ftc.gov/business-guidance/resources/disclosures-101-social-media-influencers" },
+          { type: "Workshop · 18 min", title: "From click to customer context", text: "A walkthrough of the decisions behind a useful bridge page, including what not to promise and what to measure.", icon: "presentation", url: "https://www.youtube.com/results?search_query=affiliate+marketing+funnel+education" },
+          { type: "Reference · 9 min", title: "A measurement plan that travels", text: "Keep acquisition, partner conversion and retention signals visible in one simple campaign measurement routine.", icon: "chart-no-axes-combined", url: "https://support.google.com/analytics/answer/10089681" }
+        ]
+      },
+      contact: {
+        title: "Tell me what you're building.",
+        intro: "Share a little context about your audience, current activity and the decision you're working through. I'll review the fit and suggest a useful next step.",
+        email: "hello@coachdavid.example",
+        whatsapp: "https://wa.me/15550100123",
+        availability: "Consultation availability: limited advisory conversations each month. Typical response window: two business days.",
+        emailLabel: "Email",
+        whatsappLabel: "WhatsApp",
+        emailNote: "Demo address — replace before publishing",
+        whatsappNote: "Demo contact — replace before publishing",
+        experienceLevels: ["Select your experience level", "Exploring affiliate marketing", "Building my first campaign", "Running active campaigns", "Managing a partner program"],
+        programPlaceholder: "Select a program of interest",
+        submitConfirmation: "Thanks for sharing your context. This demo form has validated your message locally; no information was sent. Connect an approved form endpoint before publishing."
+      },
+      footer: {
+        disclosure: "Affiliate disclosure: some recommendations may include partner links. Any commercial relationship should be disclosed clearly at the point of recommendation. Demo content and results shown above are illustrative.",
+        copyright: "© 2026 Coach David. All rights reserved."
+      },
+      filters: ["All Campaigns", "Organic Content", "Paid Acquisition", "Funnel Optimization"]
+    };
+
+    const $ = (selector, root = document) => root.querySelector(selector);
+    const $$ = (selector, root = document) => Array.from(root.querySelectorAll(selector));
+    const escapeHTML = value => String(value).replace(/[&<>"']/g, char => ({
+      "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;"
+    })[char]);
+    const safeHref = value => {
+      try {
+        const url = new URL(value, window.location.href);
+        return ["https:", "http:", "mailto:", "tel:"].includes(url.protocol) ? escapeHTML(url.href) : "#";
+      } catch {
+        return "#";
+      }
+    };
+
+    function renderPortfolio() {
+      const data = PORTFOLIO_DATA;
+      $("#demo-banner").textContent = data.demoDisclosure;
+      $("#brand").innerHTML = `<span class="border-l border-white/20 pl-3 font-heading text-sm font-bold tracking-tight text-slate-100">${escapeHTML(data.person.name)}</span>`;
+      $("#footer-brand").textContent = data.person.name;
+      $("#header-cta").href = "#inquiry";
+      $("#advisory-cta").href = "#inquiry";
+      $("#hero-headline").textContent = data.person.headline;
+      $("#portrait-image").src = data.person.portrait;
+      $("#portrait-image").alt = `Portrait of ${data.person.name}`;
+      $("#portrait-fallback").textContent = data.person.monogram;
+      $("#portrait-name").textContent = data.person.name;
+      $("#portrait-role").textContent = data.person.role;
+      $("#focus-status").textContent = `${data.person.focus} · ${data.person.status}`;
+      $("#platforms").textContent = data.person.platforms.join(" · ");
+      const socialMarkup = data.person.social.map(item => {
+        const label = item.label === "WhatsApp" ? "demo contact" : "demo profile";
+        return `<a class="inline-flex items-center gap-1.5 text-xs text-slate-400 transition hover:text-emerald-200" href="${safeHref(item.url)}" target="_blank" rel="noopener noreferrer" aria-label="${escapeHTML(item.label)} (${label})"><i class="social-brand-icon fa-brands fa-${escapeHTML(item.icon)}" aria-hidden="true"></i><span>${escapeHTML(item.label)}</span></a>`;
+      }).join("");
+      $("#hero-socials").innerHTML = socialMarkup;
+      $("#footer-socials").innerHTML = data.person.social.map(item => {
+        const label = item.label === "WhatsApp" ? "demo contact" : "demo profile";
+        return `<a href="${safeHref(item.url)}" target="_blank" rel="noopener noreferrer" aria-label="${escapeHTML(item.label)} (${label})" class="text-slate-400 transition hover:text-emerald-200"><i class="social-brand-icon fa-brands fa-${escapeHTML(item.icon)}" aria-hidden="true"></i></a>`;
+      }).join("");
+      $("#stats-grid").innerHTML = data.stats.map(stat => `<div class="stat-cell"><span class="stat-value">${escapeHTML(stat.value)}</span><span class="stat-label">${escapeHTML(stat.label)}</span></div>`).join("");
+      $("#stats-note").textContent = data.statsNote;
+      $("#about-title").textContent = data.about.title;
+      $("#about-lead").textContent = data.about.lead;
+      $("#about-quote").textContent = data.about.quote;
+      $("#about-story").innerHTML = data.about.story.map(paragraph => `<p>${escapeHTML(paragraph)}</p>`).join("");
+      $("#contact-title").textContent = data.contact.title;
+      $("#contact-intro").textContent = data.contact.intro;
+      $("#contact-details").innerHTML = `<div class="flex items-start gap-3"><span class="icon-box h-9 w-9"><i data-lucide="mail" class="h-4 w-4"></i></span><div><p class="text-xs font-medium">${escapeHTML(data.contact.emailLabel)}</p><a class="mt-1 block text-xs text-emerald-200 hover:text-emerald-100" href="mailto:${escapeHTML(data.contact.email)}">${escapeHTML(data.contact.email)}</a><p class="mt-1 text-[10px] text-slate-500">${escapeHTML(data.contact.emailNote)}</p></div></div><div class="flex items-start gap-3"><span class="icon-box h-9 w-9"><i data-lucide="message-circle" class="h-4 w-4"></i></span><div><p class="text-xs font-medium">${escapeHTML(data.contact.whatsappLabel)}</p><a class="mt-1 block text-xs text-emerald-200 hover:text-emerald-100" href="${safeHref(data.contact.whatsapp)}" target="_blank" rel="noopener noreferrer">Open demo contact</a><p class="mt-1 text-[10px] text-slate-500">${escapeHTML(data.contact.whatsappNote)}</p></div></div>`;
+      $("#availability-note").textContent = data.contact.availability;
+      $("#experience-select").innerHTML = data.contact.experienceLevels.map((level, index) => `<option value="${index === 0 ? "" : escapeHTML(level)}" ${index === 0 ? "disabled selected" : ""}>${escapeHTML(level)}</option>`).join("");
+      $("#program-select").innerHTML = `<option value="" disabled selected>${escapeHTML(data.contact.programPlaceholder)}</option>` + data.programs.items.map(program => `<option value="${escapeHTML(program.title)}">${escapeHTML(program.title)}</option>`).join("");
+      $("#copyright").textContent = data.footer.copyright;
+      $("#disclosure").textContent = data.footer.disclosure;
+      if (window.lucide) window.lucide.createIcons();
+    }
+
+    function setupInteractions() {
+      const form = $("#inquiry-form");
+      form.addEventListener("input", event => {
+        if (event.target.matches("input, select, textarea")) event.target.setCustomValidity("");
+        $("#form-status").classList.add("hidden");
+      });
+      form.addEventListener("submit", event => {
+        event.preventDefault();
+        $("#form-status").classList.add("hidden");
+        if (!form.reportValidity()) return;
+        $("#form-status").textContent = PORTFOLIO_DATA.contact.submitConfirmation;
+        $("#form-status").classList.remove("hidden");
+        form.reset();
+        $("#experience-select").selectedIndex = 0;
+        $("#program-select").selectedIndex = 0;
+        $("#form-status").focus({ preventScroll: true });
+      });
+
+      const revealItems = $$(".reveal");
+      if ("IntersectionObserver" in window && !window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+        const observer = new IntersectionObserver(entries => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add("is-visible");
+              observer.unobserve(entry.target);
+            }
+          });
+        }, { threshold: .12 });
+        revealItems.forEach(item => {
+          if (!item.classList.contains("reveal")) item.classList.add("reveal");
+          observer.observe(item);
+        });
+      } else {
+        revealItems.forEach(item => item.classList.add("is-visible"));
+      }
+    }
+
+    renderPortfolio();
+    setupInteractions();
+    $("#portrait-image").addEventListener("error", () => {
+      $("#portrait-image").style.display = "none";
+    });
+  </script>
+</body>
+</html>
