@@ -318,56 +318,6 @@
       </div>
     </section>
 
-    <section id="methodology" class="section-space bg-brand-gray">
-      <div class="section-wrap">
-        <div class="reveal max-w-2xl"><h2 id="method-title" class="section-title"></h2><p id="method-intro" class="section-copy mt-4 text-sm"></p></div>
-        <div class="relative mt-14">
-          <div class="timeline-line hidden sm:block"></div>
-          <div id="phases" class="relative grid gap-8 sm:grid-cols-3 sm:gap-6"></div>
-        </div>
-      </div>
-    </section>
-
-    <section id="case-studies" class="dark-band section-space overflow-hidden">
-      <div class="section-wrap">
-        <div class="reveal flex flex-col justify-between gap-6 md:flex-row md:items-end">
-          <div><h2 id="cases-title" class="section-title"></h2><p id="cases-intro" class="section-copy mt-4 max-w-2xl text-sm"></p></div>
-        </div>
-        <div id="case-filters" class="mt-8 flex flex-wrap gap-2" role="group" aria-label="Filter campaigns"></div>
-        <div id="case-grid" class="mt-6 grid gap-4 md:grid-cols-2 lg:grid-cols-3"></div>
-      </div>
-    </section>
-
-    <section id="results" class="section-space bg-white">
-      <div class="section-wrap">
-        <div class="reveal flex flex-col justify-between gap-5 md:flex-row md:items-end">
-          <div><h2 id="testimonials-title" class="section-title"></h2></div>
-          <p id="testimonials-note" class="max-w-md text-xs leading-6 text-slate-400"></p>
-        </div>
-        <div id="testimonial-grid" class="mt-9 grid gap-4 md:grid-cols-3"></div>
-      </div>
-    </section>
-
-    <section id="advisory" class="section-space bg-brand-gray">
-      <div class="section-wrap">
-        <div class="reveal flex flex-col justify-between gap-5 md:flex-row md:items-end">
-          <div><h2 id="programs-title" class="section-title"></h2></div>
-          <p id="programs-intro" class="section-copy max-w-md text-sm"></p>
-        </div>
-        <div id="program-grid" class="mt-10 grid gap-4 lg:grid-cols-3"></div>
-      </div>
-    </section>
-
-    <section id="resources" class="border-y border-gray-100 bg-brand-gray py-20">
-      <div class="section-wrap">
-        <div class="reveal flex flex-col justify-between gap-4 md:flex-row md:items-end">
-          <div><h2 id="resources-title" class="section-title"></h2></div>
-          <p id="resources-intro" class="section-copy max-w-lg text-sm"></p>
-        </div>
-        <div id="resource-grid" class="mt-8 grid gap-4 md:grid-cols-3"></div>
-      </div>
-    </section>
-
     <section id="inquiry" class="section-space bg-brand-gray">
       <div class="section-wrap">
         <div class="reveal grid gap-10 md:grid-cols-[.8fr_1.2fr] md:gap-20">
@@ -405,16 +355,6 @@
       <div id="footer-socials" class="flex items-center gap-4"></div>
     </div>
   </footer>
-
-  <div id="case-modal" class="modal-backdrop hidden" role="presentation">
-    <section class="modal-panel surface rounded-lg p-5 sm:p-8" role="dialog" aria-modal="true" aria-labelledby="modal-title" tabindex="-1">
-      <div class="flex items-start justify-between gap-4">
-        <div><h2 id="modal-title" class="font-heading text-2xl font-semibold tracking-tight"></h2><p id="modal-metric" class="mt-3"></p></div>
-        <button id="modal-close" class="grid h-9 w-9 shrink-0 place-items-center rounded border border-white/10 text-slate-300 hover:text-white" type="button" aria-label="Close campaign details"><i data-lucide="x" class="h-4 w-4"></i></button>
-      </div>
-      <div id="modal-content" class="mt-7 space-y-5"></div>
-    </section>
-  </div>
 
   <script>
     const PORTFOLIO_DATA = {
@@ -632,27 +572,6 @@
       $("#about-lead").textContent = data.about.lead;
       $("#about-quote").textContent = data.about.quote;
       $("#about-story").innerHTML = data.about.story.map(paragraph => `<p>${escapeHTML(paragraph)}</p>`).join("");
-      $("#cases-title").textContent = "What thoughtful growth can look like.";
-      $("#cases-intro").textContent = "A set of illustrative campaign snapshots showing the questions, systems and measurement choices behind a result.";
-      $("#case-filters").innerHTML = data.filters.map((filter, index) => `<button class="filter-tab" type="button" data-filter="${escapeHTML(filter)}" aria-pressed="${index === 0}">${escapeHTML(filter)}</button>`).join("");
-      $("#case-grid").innerHTML = data.caseStudies.map(item => `<article class="case-card surface rounded-lg p-5" data-category="${escapeHTML(item.category)}"><div class="flex items-start justify-between gap-3"><span class="text-[10px] text-slate-400">${escapeHTML(item.vertical)}</span><span class="metric-chip">${escapeHTML(item.metric)}</span></div><h3 class="mt-6 font-heading text-base font-semibold leading-6">${escapeHTML(item.title)}</h3><p class="mt-3 min-h-[58px] text-xs leading-6 text-slate-400">${escapeHTML(item.summary)}</p><button class="mt-5 inline-flex items-center gap-2 text-xs font-semibold text-emerald-200 hover:text-emerald-100" type="button" data-case-id="${escapeHTML(item.id)}">Read Breakdown <span aria-hidden="true">→</span></button></article>`).join("");
-
-      $("#method-title").textContent = data.methodology.title;
-      $("#method-intro").textContent = data.methodology.intro;
-      $("#phases").innerHTML = data.methodology.phases.map(phase => `<article class="relative flex gap-4 sm:block"><span class="phase-number relative z-10 shrink-0 sm:mb-6">${escapeHTML(phase.number)}</span><div class="pt-1 sm:pt-0"><h3 class="font-heading text-sm font-semibold leading-6">${escapeHTML(phase.title)}</h3><p class="mt-3 text-xs leading-6 text-slate-400">${escapeHTML(phase.text)}</p></div></article>`).join("");
-
-      $("#programs-title").textContent = data.programs.title;
-      $("#programs-intro").textContent = data.programs.intro;
-      $("#program-grid").innerHTML = data.programs.items.map(program => `<article class="program-card surface flex flex-col rounded-lg p-5 sm:p-6"><h3 class="font-heading text-lg font-semibold">${escapeHTML(program.title)}</h3><p class="mt-2 text-xs font-medium text-emerald-200">${escapeHTML(program.audience)}</p><p class="mt-4 text-xs leading-6 text-slate-400">${escapeHTML(program.description)}</p><ul class="mt-5 flex-1 space-y-2.5">${program.deliverables.map(item => `<li class="flex gap-2 text-xs text-slate-300"><i data-lucide="check" class="mt-0.5 h-3.5 w-3.5 shrink-0 text-emerald-300"></i><span>${escapeHTML(item)}</span></li>`).join("")}</ul><div class="mt-6 flex items-center justify-between border-t border-white/8 pt-4"><span class="text-[10px] text-slate-400">${escapeHTML(program.value)}</span><a class="inline-flex items-center gap-1 text-xs font-semibold text-emerald-200 hover:text-emerald-100" href="#inquiry" data-program="${escapeHTML(program.title)}">Apply / Inquire <span aria-hidden="true">↗</span></a></div></article>`).join("");
-
-      $("#testimonials-title").textContent = data.testimonials.title;
-      $("#testimonials-note").textContent = data.testimonials.note;
-      $("#testimonial-grid").innerHTML = data.testimonials.items.map(item => `<article class="quote-card surface rounded-lg p-5"><div class="quote-mark" aria-hidden="true">“</div><p class="mt-2 min-h-[105px] text-sm leading-6 text-slate-300">${escapeHTML(item.quote)}</p><div class="mt-5 border-t border-white/8 pt-4"><p class="text-xs font-semibold text-paper">${escapeHTML(item.name)}</p><p class="mt-1 text-[10px] text-slate-500">${escapeHTML(item.niche)}</p><p class="mt-3 flex items-center gap-2 text-[10px] text-emerald-200"><i data-lucide="move-up-right" class="h-3 w-3"></i>${escapeHTML(item.result)}</p></div></article>`).join("");
-
-      $("#resources-title").textContent = data.resources.title;
-      $("#resources-intro").textContent = data.resources.intro;
-      $("#resource-grid").innerHTML = data.resources.items.map(item => `<a class="resource-card surface rounded-lg p-5" href="${safeHref(item.url)}" target="_blank" rel="noopener noreferrer"><div class="flex items-center justify-between"><span class="text-[10px] text-slate-400">${escapeHTML(item.type)}</span><i data-lucide="${escapeHTML(item.icon)}" class="h-4 w-4 text-emerald-200"></i></div><h3 class="mt-5 font-heading text-sm font-semibold">${escapeHTML(item.title)}</h3><p class="mt-2 text-xs leading-6 text-slate-400">${escapeHTML(item.text)}</p><span class="mt-5 inline-flex items-center gap-2 text-[10px] font-medium text-emerald-200">Open public resource <i data-lucide="arrow-up-right" class="h-3 w-3"></i></span></a>`).join("");
-
       $("#contact-title").textContent = data.contact.title;
       $("#contact-intro").textContent = data.contact.intro;
       $("#contact-details").innerHTML = `<div class="flex items-start gap-3"><span class="icon-box h-9 w-9"><i data-lucide="mail" class="h-4 w-4"></i></span><div><p class="text-xs font-medium">${escapeHTML(data.contact.emailLabel)}</p><a class="mt-1 block text-xs text-emerald-200 hover:text-emerald-100" href="mailto:${escapeHTML(data.contact.email)}">${escapeHTML(data.contact.email)}</a><p class="mt-1 text-[10px] text-slate-500">${escapeHTML(data.contact.emailNote)}</p></div></div><div class="flex items-start gap-3"><span class="icon-box h-9 w-9"><i data-lucide="message-circle" class="h-4 w-4"></i></span><div><p class="text-xs font-medium">${escapeHTML(data.contact.whatsappLabel)}</p><a class="mt-1 block text-xs text-emerald-200 hover:text-emerald-100" href="${safeHref(data.contact.whatsapp)}" target="_blank" rel="noopener noreferrer">Open demo contact</a><p class="mt-1 text-[10px] text-slate-500">${escapeHTML(data.contact.whatsappNote)}</p></div></div>`;
@@ -665,75 +584,6 @@
     }
 
     function setupInteractions() {
-      $("#case-filters").addEventListener("click", event => {
-        const button = event.target.closest("[data-filter]");
-        if (!button) return;
-        const filter = button.dataset.filter;
-        $$("#case-filters [data-filter]").forEach(tab => tab.setAttribute("aria-pressed", String(tab === button)));
-        $$("#case-grid .case-card").forEach(card => {
-          card.hidden = filter !== PORTFOLIO_DATA.filters[0] && card.dataset.category !== filter;
-        });
-      });
-
-      const modal = $("#case-modal");
-      const modalPanel = $(".modal-panel", modal);
-      const closeButton = $("#modal-close");
-      let previousFocus = null;
-      function closeModal() {
-        modal.classList.add("hidden");
-        document.body.style.overflow = "";
-        if (previousFocus) previousFocus.focus();
-      }
-      function openModal(item, trigger) {
-        previousFocus = trigger;
-        $("#modal-title").textContent = item.title;
-        $("#modal-metric").innerHTML = `<span class="metric-chip">${escapeHTML(item.metric)}</span>`;
-        const details = [
-          ["The Challenge", item.challenge],
-          ["The Strategy & Traffic Source", item.strategy],
-          ["Funnel Architecture", item.architecture],
-          ["Illustrative Outcome*", item.outcome]
-        ];
-        $("#modal-content").innerHTML = details.map(([heading, body]) => `<div><h3 class="text-xs font-semibold text-paper">${escapeHTML(heading)}</h3><p class="mt-2 text-xs leading-6 text-slate-400">${escapeHTML(body)}</p></div>`).join("") + `<p class="border-t border-gray-200 pt-4 text-[10px] leading-5 text-gray-600">${escapeHTML(PORTFOLIO_DATA.statsNote)} Figures are illustrative demo data, not verified claims.</p>`;
-        modal.classList.remove("hidden");
-        document.body.style.overflow = "hidden";
-        modalPanel.focus();
-        if (window.lucide) window.lucide.createIcons();
-      }
-      $("#case-grid").addEventListener("click", event => {
-        const trigger = event.target.closest("[data-case-id]");
-        if (!trigger) return;
-        const item = PORTFOLIO_DATA.caseStudies.find(study => study.id === trigger.dataset.caseId);
-        if (item) openModal(item, trigger);
-      });
-      closeButton.addEventListener("click", closeModal);
-      modal.addEventListener("click", event => {
-        if (event.target === modal) closeModal();
-      });
-      document.addEventListener("keydown", event => {
-        if (event.key === "Escape") {
-          if (!modal.classList.contains("hidden")) closeModal();
-        }
-        if (event.key === "Tab" && !modal.classList.contains("hidden")) {
-          const focusable = $$('button:not([disabled]), a[href], input:not([disabled]), select:not([disabled]), textarea:not([disabled])', modal);
-          const first = focusable[0];
-          const last = focusable[focusable.length - 1];
-          if (event.shiftKey && (document.activeElement === first || document.activeElement === modalPanel)) {
-            event.preventDefault();
-            last.focus();
-          } else if (!event.shiftKey && document.activeElement === last) {
-            event.preventDefault();
-            first.focus();
-          }
-        }
-      });
-
-      $("#program-grid").addEventListener("click", event => {
-        const link = event.target.closest("[data-program]");
-        if (!link) return;
-        $("#program-select").value = link.dataset.program;
-      });
-
       const form = $("#inquiry-form");
       form.addEventListener("input", event => {
         if (event.target.matches("input, select, textarea")) event.target.setCustomValidity("");
@@ -751,7 +601,7 @@
         $("#form-status").focus({ preventScroll: true });
       });
 
-      const revealItems = $$(".reveal, .pillar-card, .case-card, #phases article, .program-card, .quote-card, .resource-card");
+      const revealItems = $$(".reveal");
       if ("IntersectionObserver" in window && !window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
         const observer = new IntersectionObserver(entries => {
           entries.forEach(entry => {
@@ -768,7 +618,6 @@
       } else {
         revealItems.forEach(item => item.classList.add("is-visible"));
       }
-
     }
 
     renderPortfolio();
