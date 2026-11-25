@@ -170,6 +170,11 @@
       .timeline-line { top: 0; bottom: 0; left: 20px; right: auto; width: 1px; height: auto; background: rgba(148,163,184,.2); }
       .modal-backdrop { padding: 14px; }
     }
+    @media (max-width: 400px) {
+      .portfolio-header .section-wrap { gap: 8px; }
+      .header-brand-avatar { width: 26px; height: 26px; }
+      #header-cta { padding-inline: 12px !important; }
+    }
     @media (prefers-reduced-motion: reduce) {
       *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
       .reveal { opacity: 1; transform: none; }
@@ -206,7 +211,9 @@
     .dark-band .surface h3, .dark-band .surface .font-heading { color: #f9fafb; }
     .portfolio-header { background: rgba(11,15,25,.94) !important; }
     .text-gray-700 { color: #cbd5e1 !important; }
-    .hero-grid { grid-template-columns: minmax(0,1fr); gap: 42px; align-items: start; }
+    .hero-grid { grid-template-columns: minmax(0,1.1fr) minmax(300px,.9fr); gap: clamp(42px,7vw,96px); align-items: center; }
+    .hero-grid > .reveal:not(.hero-intro-card) { grid-column: 2; grid-row: 1; justify-self: end; }
+    .hero-grid > .hero-intro-card { grid-column: 1; grid-row: 1; width: 100%; max-width: none; margin-inline: 0; }
     .hero-intro-card { padding: clamp(24px,5vw,48px); border: 1px solid rgba(148,163,184,.18); border-radius: 12px; background: #111827; text-align: center; transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease; }
     .hero-intro-card:hover { transform: translateY(-3px); border-color: rgba(16,185,129,.35); box-shadow: 0 18px 42px rgba(0,0,0,.32); }
     .top-glow { background: transparent; }
@@ -222,6 +229,7 @@
     .portrait-card > div.mt-4 { position: absolute; inset: auto 0 0; z-index: 10; margin-top: 0; padding: 16px 20px; border-top: 1px solid rgba(255,255,255,.15); background: rgba(8,15,24,.68); backdrop-filter: blur(8px); }
     .portrait-card .text-brand-navy { color: #f9fafb !important; }
     .portrait-card .text-gray-600, .portrait-card .text-gray-500 { color: #cbd5e1 !important; }
+    .header-brand-avatar { width: 30px; height: 30px; flex: none; border: 1px solid rgba(255,255,255,.55); border-radius: 50%; object-fit: cover; filter: grayscale(1); }
     .social-brand-icon { width: 1rem; text-align: center; font-size: 14px; }
     #footer-socials .social-brand-icon { font-size: 16px; }
     .portrait-fallback { color: rgba(167,243,208,.72); font: 500 118px Georgia, "Times New Roman", serif; }
@@ -249,7 +257,12 @@
     .dark-band .surface .text-slate-400, .dark-band .surface .text-slate-500 { color: #aeb8c7 !important; }
     .dark-band .surface .text-emerald-100, .dark-band .surface .text-emerald-200, .dark-band .surface .text-emerald-300 { color: #a7f3d0 !important; }
     .section-space { padding-block: 112px; }
-    @media (max-width: 860px) { .section-space { padding-block: 84px; } }
+    @media (max-width: 860px) {
+      .section-space { padding-block: 84px; }
+      .hero-grid { grid-template-columns: minmax(0,1fr); gap: 36px; }
+      .hero-grid > .reveal:not(.hero-intro-card), .hero-grid > .hero-intro-card { grid-column: 1; grid-row: auto; }
+      .hero-grid > .reveal:not(.hero-intro-card) { justify-self: center; }
+    }
     @media (max-width: 640px) { .section-space { padding-block: 72px; } }
   </style>
 </head>
@@ -358,6 +371,7 @@
         role: "Digital Marketer & Affiliate Marketing Coach",
         headline: "I’m Coach David, an affiliate marketer with over $15,000 in personal sales and 3,000+ students in training across Africa. I teach practical digital skills that help everyday people build sustainable affiliate businesses they can actually rely on and earn from.",
         portrait: "assets/coach-david.jpg",
+        avatar: "assets/coach-david-avatar.jpg",
         social: [
           { label: "Facebook", url: "https://www.facebook.com/search/top/?q=affiliate%20marketing", icon: "facebook-f" },
           { label: "X", url: "https://x.com/search?q=affiliate%20marketing", icon: "x-twitter" },
@@ -534,7 +548,7 @@
 
     function renderPortfolio() {
       const data = PORTFOLIO_DATA;
-      $("#brand").innerHTML = `<span class="border-l border-white/20 pl-3 font-heading text-sm font-bold tracking-tight text-slate-100">${escapeHTML(data.person.name)}</span>`;
+      $("#brand").innerHTML = `<img class="header-brand-avatar" src="${safeHref(data.person.avatar)}" alt=""><span class="border-l border-white/20 pl-3 font-heading text-sm font-bold tracking-tight text-slate-100">${escapeHTML(data.person.name)}</span>`;
       $("#footer-brand").textContent = data.person.name;
       $("#header-cta").href = "#inquiry";
       $("#advisory-cta").href = "#inquiry";
