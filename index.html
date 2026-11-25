@@ -105,16 +105,20 @@
     .dark-band .stat-cell { border-color: rgba(255,255,255,.15); }
     .stat-value { display: block; color: #ffde00; font: 800 clamp(1.3rem, 2.5vw, 1.8rem)/1.2 Inter, Arial, sans-serif; letter-spacing: -.03em; }
     .stat-label { display: block; margin-top: 9px; color: #d1d5db; font-size: 11px; line-height: 1.55; }
-    .proof-card { display: block; width: 100%; padding: 16px; border: 1px solid rgba(148,163,184,.16); color: inherit; text-align: left; cursor: zoom-in; }
+    .proof-track { overflow-x: auto; overflow-y: hidden; scroll-snap-type: x mandatory; scrollbar-width: none; -ms-overflow-style: none; overscroll-behavior-x: contain; }
+    .proof-track::-webkit-scrollbar { display: none; }
+    .proof-section-wrap { width: min(1640px,calc(100% - 48px)); margin-inline: auto; }
+    .proof-card { flex: 0 0 min(84vw,500px); height: 372px; display: grid; place-items: center; padding: 16px; border: 1px solid rgba(148,163,184,.16); border-radius: 16px !important; background: #111827 !important; color: inherit; cursor: zoom-in; scroll-snap-align: start; }
+    .proof-card.surface { border-radius: 16px !important; }
+    @media (min-width: 768px) { .proof-card { flex-basis: min(30vw,500px); } }
     .proof-card:hover { border-color: rgba(16,185,129,.45); box-shadow: 0 16px 34px rgba(0,0,0,.2); transform: translateY(-2px); }
-    .proof-media-frame { position: relative; display: grid; aspect-ratio: 16 / 9; place-items: center; overflow: hidden; background: #0b0f14; }
+    .proof-heading { color: #f9fafb; font: 800 clamp(1.75rem,3vw,2.5rem)/1.2 Inter,Arial,sans-serif; }
+    .proof-media-frame { position: relative; display: grid; height: 100%; aspect-ratio: 9 / 16; place-items: center; overflow: hidden; background: #0b0f14; }
     .proof-media-frame > img, .proof-media-frame > video { width: 100%; height: 100%; object-fit: contain; }
-    .proof-media-fallback { padding: 16px; color: #aeb8c7; font-size: 12px; line-height: 1.6; text-align: center; overflow-wrap: anywhere; }
-    .proof-caption { height: 3.5em; overflow: auto; overscroll-behavior: contain; scrollbar-width: thin; }
-    .dark-band .proof-card.surface strong.text-slate-100 { color: #f9fafb !important; }
+    .proof-media-fallback { position: absolute; inset: 0; background: #0b0f14; }
     .proof-lightbox { width: min(1000px, calc(100% - 32px)); max-width: none; max-height: 92vh; padding: 0; overflow: hidden; border: 1px solid rgba(148,163,184,.28); border-radius: 10px; background: #111827; color: #f9fafb; }
     .proof-lightbox::backdrop { background: rgba(2,6,12,.84); backdrop-filter: blur(6px); }
-    .proof-lightbox-media { display: grid; min-height: 200px; max-height: calc(92vh - 80px); aspect-ratio: 16 / 9; place-items: center; overflow: auto; background: #0b0f14; }
+    .proof-lightbox-media { display: grid; width: min(100%,calc((92vh - 80px) * 9 / 16)); height: calc(92vh - 80px); max-height: calc(92vh - 80px); margin-inline: auto; aspect-ratio: 9 / 16; place-items: center; overflow: auto; background: #0b0f14; }
     .proof-lightbox-media > img, .proof-lightbox-media > video { display: block; width: 100%; height: 100%; max-height: calc(92vh - 80px); object-fit: contain; }
     .proof-card:focus-visible, .proof-lightbox button:focus-visible { outline: 2px solid #6ee7b7; outline-offset: 3px; }
     .pillar-card, .case-card, .program-card, .quote-card, .resource-card { transition: border-color .25s ease, box-shadow .25s ease, transform .25s ease; }
@@ -174,6 +178,7 @@
     }
     @media (max-width: 640px) {
       .section-wrap { width: min(100% - 36px, 520px); }
+      .proof-section-wrap { width: min(100% - 36px,520px); }
       .section-space { padding-block: 64px; }
       .hero-grid { grid-template-columns: 1fr; gap: 36px; }
       .portrait-card { min-height: 405px; }
@@ -210,7 +215,7 @@
     #advisory { order: 7; background: #0e1420; }
     #results { order: 8; background: #0b0f19; }
     #resources { order: 9; background: #0e1420; }
-    #proof-of-work { order: 10; background: #0b0f19; }
+    #proof-of-work { order: 10; background: #0b0f19; scroll-margin-top: 88px; }
     .section-space { padding-block: 112px; }
     .font-heading { font-family: Georgia, "Times New Roman", serif !important; font-weight: 400 !important; letter-spacing: -.025em !important; }
     .section-title { color: #f9fafb; font: 400 clamp(2rem,4vw,3.1rem)/1.15 Georgia, "Times New Roman", serif; letter-spacing: -.025em; }
@@ -338,12 +343,11 @@
     </section>
 
     <section id="proof-of-work" class="section-space dark-band">
-      <div class="section-wrap">
-        <div class="reveal fade-only mb-10">
-          <p class="mb-3 text-xs font-semibold uppercase tracking-[.18em] text-emerald-200">Campaign evidence</p>
-          <h2 class="section-title">Proof of Work &amp; Verified Results</h2>
+      <div class="proof-section-wrap">
+        <div class="reveal fade-only mb-10 text-center">
+          <h2 class="proof-heading">MY STUDENT REVIEWS</h2>
         </div>
-        <div id="proof-grid" class="grid grid-cols-1 gap-6 md:grid-cols-2"></div>
+        <div id="proof-grid" class="proof-track flex gap-6" tabindex="0" role="region" aria-label="Scrollable student reviews"></div>
       </div>
     </section>
 
@@ -351,7 +355,7 @@
 
   <dialog id="proof-lightbox" class="proof-lightbox" aria-labelledby="proof-lightbox-title">
     <div class="flex items-center justify-between gap-4 border-b border-white/10 px-4 py-3">
-      <h2 id="proof-lightbox-title" class="font-heading text-base"></h2>
+      <h2 id="proof-lightbox-title" class="font-heading text-base">Student review media</h2>
       <button id="proof-lightbox-close" class="rounded border border-white/20 px-3 py-2 text-sm text-slate-200 hover:border-emerald-300" type="button" aria-label="Close media viewer">Close</button>
     </div>
     <div id="proof-lightbox-media" class="proof-lightbox-media"></div>
@@ -385,14 +389,14 @@
         { value: "3,000+", label: "Students in training across Africa" }
       ],
       proofResults: [
-        { category: "Selar Sales", headline: "Your verified sales total", caption: "Add the sales figure, date range, and source shown in your Selar dashboard.", media: "assets/proof-1.webp", type: "image" },
-        { category: "Student Result", headline: "A student milestone", caption: "Add an approved student result and the context behind their progress.", media: "assets/proof-2.mp4", type: "video" },
-        { category: "Funnel Metrics", headline: "Your funnel conversion rate", caption: "Add the measured conversion result, funnel stage, and reporting period.", media: "assets/proof-3.webp", type: "image" },
-        { category: "Campaign Performance", headline: "Your campaign return", caption: "Add the verified campaign outcome and the measurement source.", media: "assets/proof-4.webp", type: "image" },
-        { category: "Selar Sales", headline: "A sales growth milestone", caption: "Add a second sales screenshot with its date range and product context.", media: "assets/proof-1.webp", type: "image" },
-        { category: "Student Result", headline: "Another learner success", caption: "Add an approved student story and evidence of the result achieved.", media: "assets/proof-2.mp4", type: "video" },
-        { category: "Funnel Metrics", headline: "A lead-to-sale result", caption: "Add verified lead and sale counts with the period they represent.", media: "assets/proof-3.webp", type: "image" },
-        { category: "Campaign Performance", headline: "A campaign improvement", caption: "Add the campaign evidence, comparison period, and source for this result.", media: "assets/proof-4.webp", type: "image" }
+        { media: "assets/proof-1.webp", type: "image" },
+        { media: "assets/proof-2.mp4", type: "video" },
+        { media: "assets/proof-3.webp", type: "image" },
+        { media: "assets/proof-4.webp", type: "image" },
+        { media: "assets/proof-1.webp", type: "image" },
+        { media: "assets/proof-2.mp4", type: "video" },
+        { media: "assets/proof-3.webp", type: "image" },
+        { media: "assets/proof-4.webp", type: "image" }
       ],
       about: {
         title: "Experience earned in the campaign trenches.",
@@ -543,16 +547,13 @@
       $("#stats-grid").innerHTML = data.stats.map(stat => `<div class="stat-cell"><span class="stat-value">${escapeHTML(stat.value)}</span><span class="stat-label">${escapeHTML(stat.label)}</span></div>`).join("");
       $("#proof-grid").innerHTML = data.proofResults.map((item, index) => {
         const media = item.type === "video"
-          ? `<video src="${safeHref(item.media)}" autoplay muted loop playsinline preload="metadata" aria-label="${escapeHTML(item.headline)}"></video>`
-          : `<img src="${safeHref(item.media)}" alt="${escapeHTML(item.headline)}" loading="lazy">`;
-        return `<button class="proof-card surface rounded-lg reveal" type="button" data-proof-index="${index}" aria-label="Inspect proof: ${escapeHTML(item.headline)}">
-          <span class="proof-media-frame aspect-video">
+          ? `<video src="${safeHref(item.media)}" autoplay muted loop playsinline preload="metadata" aria-label="Student review media ${index + 1}"></video>`
+          : `<img src="${safeHref(item.media)}" alt="Student review media ${index + 1}" loading="lazy">`;
+        return `<button class="proof-card surface rounded-lg" type="button" data-proof-index="${index}" aria-label="Open student review media ${index + 1}">
+          <span class="proof-media-frame aspect-[9/16]">
             ${media}
-            <span class="proof-media-fallback hidden">Add proof media at <code>${escapeHTML(item.media)}</code></span>
+            <span class="proof-media-fallback hidden" aria-hidden="true"></span>
           </span>
-          <span class="mt-5 inline-flex rounded-full border border-emerald/30 bg-emerald/5 px-3 py-1 text-[10px] font-semibold uppercase tracking-[.12em] text-emerald-200">${escapeHTML(item.category)}</span>
-          <strong class="mt-3 block font-heading text-xl font-semibold text-slate-100">${escapeHTML(item.headline)}</strong>
-          <span class="proof-caption mt-2 block text-sm leading-relaxed text-slate-400" title="${escapeHTML(item.caption)}">${escapeHTML(item.caption)}</span>
         </button>`;
       }).join("");
       $$(".proof-media-frame > img, .proof-media-frame > video").forEach(media => {
@@ -600,7 +601,7 @@
         if (!card) return;
         const proof = PORTFOLIO_DATA.proofResults[Number(card.dataset.proofIndex)];
         if (!proof) return;
-        proofLightboxTitle.textContent = `${proof.category}: ${proof.headline}`;
+        proofLightboxTitle.textContent = "Student review media";
         const media = document.createElement(proof.type === "video" ? "video" : "img");
         media.src = proof.media;
         if (proof.type === "video") {
@@ -614,10 +615,7 @@
           media.alt = proof.headline;
         }
         media.addEventListener("error", () => {
-          const fallback = document.createElement("p");
-          fallback.className = "proof-media-fallback";
-          fallback.textContent = `Add proof media at ${proof.media}`;
-          proofLightboxMedia.replaceChildren(fallback);
+          media.hidden = true;
         }, { once: true });
         proofLightboxMedia.replaceChildren(media);
         proofLightbox.showModal();
