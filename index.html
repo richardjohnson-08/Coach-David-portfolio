@@ -111,6 +111,11 @@
     .proof-card { flex: 0 0 220px; height: 372px; display: grid; place-items: center; padding: 0; border: 1px solid rgba(249,250,251,.62); border-radius: 10px; background: transparent; color: inherit; cursor: zoom-in; scroll-snap-align: start; }
     .proof-media-frame { position: relative; display: grid; height: 100%; aspect-ratio: 9 / 16; place-items: center; overflow: hidden; border: 1px solid rgba(249,250,251,.72); border-radius: 8px; background: #0b0f14; }
     .proof-media-frame > img, .proof-media-frame > video { width: 100%; height: 100%; object-fit: contain; }
+    @media (min-width: 1024px) {
+      .proof-track { gap: 16px; overflow-x: hidden; }
+      .proof-card { flex: 1 1 0; height: auto; }
+      .proof-media-frame { width: 100%; height: auto; }
+    }
     .proof-media-fallback { position: absolute; inset: 0; background: #0b0f14; }
     .proof-lightbox { width: min(1000px, calc(100% - 32px)); max-width: none; max-height: 92vh; padding: 0; overflow: hidden; border: 1px solid rgba(148,163,184,.28); border-radius: 10px; background: #111827; color: #f9fafb; }
     .proof-lightbox::backdrop { background: rgba(2,6,12,.84); backdrop-filter: blur(6px); }
@@ -205,6 +210,7 @@
     main { display: flex; flex-direction: column; }
     #top { order: 1; background: radial-gradient(ellipse at 68% 4%, rgba(16,185,129,.1), transparent 36%), #0b0f19; }
     #metrics { order: 2; background: #0b0f19; }
+    #about { order: 3; background: #0e1420; }
     #case-studies { order: 5; background: #0e1420; }
     #methodology { order: 6; background: #0b0f19; }
     #advisory { order: 7; background: #0e1420; }
@@ -283,7 +289,7 @@
   <header class="portfolio-header sticky top-0 z-50 border-b border-white/10 backdrop-blur-xl">
     <div class="section-wrap flex h-[72px] items-center justify-between gap-5">
       <a id="brand" class="flex shrink-0 items-center gap-3" href="#top" aria-label="Go to homepage"></a>
-      <a id="header-cta" class="btn-primary !min-h-[48px] !px-6 text-xs sm:text-sm" href="#proof-of-work">Work With Me <i data-lucide="arrow-up-right" class="h-4 w-4"></i></a>
+      <a id="header-cta" class="btn-primary !min-h-[48px] !px-6 text-xs sm:text-sm" href="#proof-of-work">Let's Connect <i data-lucide="arrow-up-right" class="h-4 w-4"></i></a>
     </div>
   </header>
 
@@ -299,12 +305,11 @@
               <div class="mt-4">
                 <div class="flex items-baseline justify-between gap-3">
                   <div><p id="portrait-name" class="font-heading text-xl font-extrabold tracking-tight text-brand-navy"></p><p id="portrait-role" class="mt-1 text-xs text-gray-600"></p></div>
-                  <span class="text-xs text-gray-500">Independent advisor</span>
                 </div>
               </div>
             </div>
             <div class="mt-6 flex flex-col items-start gap-5 px-0 sm:flex-row sm:items-center sm:gap-7 lg:mt-7 lg:px-3">
-              <a id="advisory-cta" class="btn-primary min-h-[54px] w-full justify-center px-8 py-4 text-sm sm:w-auto" href="#proof-of-work">Connect with me <i data-lucide="message-circle" class="h-4 w-4"></i></a>
+              <a id="advisory-cta" class="btn-primary min-h-[54px] w-full justify-center px-8 py-4 text-sm sm:w-auto" href="#proof-of-work">Connect with me <i class="social-brand-icon fa-brands fa-whatsapp" aria-hidden="true"></i></a>
               <div id="hero-socials" class="flex w-full flex-wrap items-center justify-center gap-x-5 gap-y-3 px-4 sm:w-auto sm:flex-1 sm:pl-6 sm:pr-2"></div>
             </div>
           </div>
@@ -318,6 +323,22 @@
     <section id="metrics" class="dark-band px-6 py-12 md:px-12 md:py-16" aria-label="Coach David's performance metrics">
       <div class="section-wrap">
         <div id="stats-grid" class="mx-auto grid max-w-3xl grid-cols-2"></div>
+      </div>
+    </section>
+
+    <section id="about" class="section-space dark-band">
+      <div class="section-wrap max-w-4xl">
+        <div class="reveal fade-only mb-12 text-center">
+          <h2 id="about-title" class="section-title"></h2>
+          <div class="mx-auto mt-6 h-1 w-12 bg-emerald-500"></div>
+        </div>
+        <div class="surface reveal fade-only delay-100 space-y-5 p-8 text-base leading-relaxed text-gray-700 md:p-12 md:text-lg">
+          <p id="about-lead" class="text-2xl font-bold text-slate-100"></p>
+          <div id="about-story" class="space-y-5"></div>
+          <div class="dark-band relative mt-8 border-l-4 border-amber-400 p-7 md:p-9">
+            <p id="about-quote" class="relative z-10 text-lg italic leading-relaxed text-white md:text-xl"></p>
+          </div>
+        </div>
       </div>
     </section>
 
@@ -366,15 +387,22 @@ I teach practical digital skills that help everyday people build sustainable inc
         { value: "$15,000", label: "Total Sales" },
         { value: "3,000+", label: "Students in training across Africa" }
       ],
+      about: {
+        title: "Experience earned in the campaign trenches.",
+        lead: "Hi, ambitious affiliate marketer.",
+        quote: "A click is only the beginning. Sustainable growth comes from earning trust, guiding a good decision, and staying useful after the sale.",
+        story: [
+          "My work began on the operator side: buying media, evaluating offers and learning what happens when a campaign meets real people. That experience taught me that a strong affiliate business is built on more than a clever hook or a temporary traffic advantage.",
+          "Over time, I moved from running individual campaigns to teaching the systems behind them. Today I work with marketers and partner teams to make offer selection, audience education, measurement and follow-up function as one coherent operating model.",
+          "My approach is deliberately durable: position offers honestly, acquire traffic with a clear view of its economics, then earn the next conversation through useful content and thoughtful retention. Compliance isn't a footnote — it's part of the strategy."
+        ],
+      },
       proofResults: [
-        { media: "assets/proof-1.webp", type: "image" },
-        { media: "assets/proof-2.mp4", type: "video" },
-        { media: "assets/proof-3.webp", type: "image" },
-        { media: "assets/proof-4.webp", type: "image" },
-        { media: "assets/proof-1.webp", type: "image" },
-        { media: "assets/proof-2.mp4", type: "video" },
-        { media: "assets/proof-3.webp", type: "image" },
-        { media: "assets/proof-4.webp", type: "image" }
+        { media: "assets/student-win-01.jpg", type: "image", headline: "Student reports ₦180,000 in sales in three weeks." },
+        { media: "assets/student-win-02.jpg", type: "image", headline: "Student celebrates a new work laptop after starting affiliate marketing." },
+        { media: "assets/student-win-03.jpg", type: "image", headline: "Student celebrates a new phone after learning affiliate marketing." },
+        { media: "assets/student-win-04.jpg", type: "image", headline: "Student reports 37 affiliate sales totaling ₦100,177.50." },
+        { media: "assets/student-win-05.jpg", type: "image", headline: "Student shares saving ₦300,000 over two months toward a laptop." }
       ],
       caseStudies: [
         {
@@ -503,6 +531,10 @@ I teach practical digital skills that help everyday people build sustainable inc
       $("#portrait-fallback").textContent = data.person.monogram;
       $("#portrait-name").textContent = data.person.name;
       $("#portrait-role").textContent = data.person.role;
+      $("#about-title").textContent = data.about.title;
+      $("#about-lead").textContent = data.about.lead;
+      $("#about-story").innerHTML = data.about.story.map(paragraph => `<p>${escapeHTML(paragraph)}</p>`).join("");
+      $("#about-quote").textContent = data.about.quote;
       const socialMarkup = data.person.social.map(item => {
         const label = item.label === "WhatsApp" ? "demo contact" : "demo profile";
         return `<a class="inline-flex items-center gap-1.5 text-xs text-slate-400 transition hover:text-emerald-200" href="${safeHref(item.url)}" target="_blank" rel="noopener noreferrer" aria-label="${escapeHTML(item.label)} (${label})"><i class="social-brand-icon fa-brands fa-${escapeHTML(item.icon)}" aria-hidden="true"></i><span>${escapeHTML(item.label)}</span></a>`;
@@ -515,9 +547,9 @@ I teach practical digital skills that help everyday people build sustainable inc
       $("#stats-grid").innerHTML = data.stats.map(stat => `<div class="stat-cell"><span class="stat-value">${escapeHTML(stat.value)}</span><span class="stat-label">${escapeHTML(stat.label)}</span></div>`).join("");
       $("#proof-grid").innerHTML = data.proofResults.map((item, index) => {
         const media = item.type === "video"
-          ? `<video src="${safeHref(item.media)}" autoplay muted loop playsinline preload="metadata" aria-label="Student review media ${index + 1}"></video>`
-          : `<img src="${safeHref(item.media)}" alt="Student review media ${index + 1}" loading="lazy">`;
-        return `<button class="proof-card" type="button" data-proof-index="${index}" aria-label="Open student review media ${index + 1}">
+          ? `<video src="${safeHref(item.media)}" autoplay muted loop playsinline preload="metadata" aria-label="${escapeHTML(item.headline)}"></video>`
+          : `<img src="${safeHref(item.media)}" alt="${escapeHTML(item.headline)}" loading="lazy">`;
+        return `<button class="proof-card" type="button" data-proof-index="${index}" aria-label="Open student win: ${escapeHTML(item.headline)}">
           <span class="proof-media-frame aspect-[9/16]">
             ${media}
             <span class="proof-media-fallback hidden" aria-hidden="true"></span>
@@ -548,7 +580,7 @@ I teach practical digital skills that help everyday people build sustainable inc
             character += 1;
             output.textContent = text.slice(0, character);
             if (character < text.length) {
-              window.setTimeout(typeNextCharacter, 24);
+              window.setTimeout(typeNextCharacter, 36);
             } else {
               output.classList.remove("typing-active");
               resolve();
@@ -565,7 +597,7 @@ I teach practical digital skills that help everyday people build sustainable inc
         if (!card) return;
         const proof = PORTFOLIO_DATA.proofResults[Number(card.dataset.proofIndex)];
         if (!proof) return;
-        proofLightboxTitle.textContent = "Student review media";
+        proofLightboxTitle.textContent = proof.headline;
         const media = document.createElement(proof.type === "video" ? "video" : "img");
         media.src = proof.media;
         if (proof.type === "video") {
