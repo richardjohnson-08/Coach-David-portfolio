@@ -105,6 +105,18 @@
     .dark-band .stat-cell { border-color: rgba(255,255,255,.15); }
     .stat-value { display: block; color: #ffde00; font: 800 clamp(1.3rem, 2.5vw, 1.8rem)/1.2 Inter, Arial, sans-serif; letter-spacing: -.03em; }
     .stat-label { display: block; margin-top: 9px; color: #d1d5db; font-size: 11px; line-height: 1.55; }
+    .proof-card { display: block; width: 100%; padding: 16px; border: 1px solid rgba(148,163,184,.16); color: inherit; text-align: left; cursor: zoom-in; }
+    .proof-card:hover { border-color: rgba(16,185,129,.45); box-shadow: 0 16px 34px rgba(0,0,0,.2); transform: translateY(-2px); }
+    .proof-media-frame { position: relative; display: grid; aspect-ratio: 16 / 9; place-items: center; overflow: hidden; background: #0b0f14; }
+    .proof-media-frame > img, .proof-media-frame > video { width: 100%; height: 100%; object-fit: contain; }
+    .proof-media-fallback { padding: 16px; color: #aeb8c7; font-size: 12px; line-height: 1.6; text-align: center; overflow-wrap: anywhere; }
+    .proof-caption { height: 3.5em; overflow: auto; overscroll-behavior: contain; scrollbar-width: thin; }
+    .dark-band .proof-card.surface strong.text-slate-100 { color: #f9fafb !important; }
+    .proof-lightbox { width: min(1000px, calc(100% - 32px)); max-width: none; max-height: 92vh; padding: 0; overflow: hidden; border: 1px solid rgba(148,163,184,.28); border-radius: 10px; background: #111827; color: #f9fafb; }
+    .proof-lightbox::backdrop { background: rgba(2,6,12,.84); backdrop-filter: blur(6px); }
+    .proof-lightbox-media { display: grid; min-height: 200px; max-height: calc(92vh - 80px); aspect-ratio: 16 / 9; place-items: center; overflow: auto; background: #0b0f14; }
+    .proof-lightbox-media > img, .proof-lightbox-media > video { display: block; width: 100%; height: 100%; max-height: calc(92vh - 80px); object-fit: contain; }
+    .proof-card:focus-visible, .proof-lightbox button:focus-visible { outline: 2px solid #6ee7b7; outline-offset: 3px; }
     .pillar-card, .case-card, .program-card, .quote-card, .resource-card { transition: border-color .25s ease, box-shadow .25s ease, transform .25s ease; }
     .pillar-card:hover, .case-card:hover, .program-card:hover, .quote-card:hover, .resource-card:hover { border-color: #2b4bff; box-shadow: 0 16px 34px rgba(6,11,25,.12); transform: translateY(-4px); }
     .icon-box { display: grid; place-items: center; width: 42px; height: 42px; color: #2b4bff; }
@@ -198,7 +210,7 @@
     #advisory { order: 7; background: #0e1420; }
     #results { order: 8; background: #0b0f19; }
     #resources { order: 9; background: #0e1420; }
-    #inquiry { order: 10; background: #0b0f19; }
+    #proof-of-work { order: 10; background: #0b0f19; }
     .section-space { padding-block: 112px; }
     .font-heading { font-family: Georgia, "Times New Roman", serif !important; font-weight: 400 !important; letter-spacing: -.025em !important; }
     .section-title { color: #f9fafb; font: 400 clamp(2rem,4vw,3.1rem)/1.15 Georgia, "Times New Roman", serif; letter-spacing: -.025em; }
@@ -271,7 +283,7 @@
   <header class="portfolio-header sticky top-0 z-50 border-b border-white/10 backdrop-blur-xl">
     <div class="section-wrap flex h-[72px] items-center justify-between gap-5">
       <a id="brand" class="flex shrink-0 items-center gap-3" href="#top" aria-label="Go to homepage"></a>
-      <a id="header-cta" class="btn-primary !min-h-[48px] !px-6 text-xs sm:text-sm" href="#inquiry">Work With Me <i data-lucide="arrow-up-right" class="h-4 w-4"></i></a>
+      <a id="header-cta" class="btn-primary !min-h-[48px] !px-6 text-xs sm:text-sm" href="#proof-of-work">Work With Me <i data-lucide="arrow-up-right" class="h-4 w-4"></i></a>
     </div>
   </header>
 
@@ -292,7 +304,7 @@
               </div>
             </div>
             <div class="mt-6 flex flex-col items-start gap-5 px-0 sm:flex-row sm:items-center sm:gap-7 lg:mt-7 lg:px-3">
-              <a id="advisory-cta" class="btn-primary min-h-[54px] w-full justify-center px-8 py-4 text-sm sm:w-auto" href="#inquiry">Connect with me <i data-lucide="message-circle" class="h-4 w-4"></i></a>
+              <a id="advisory-cta" class="btn-primary min-h-[54px] w-full justify-center px-8 py-4 text-sm sm:w-auto" href="#proof-of-work">Connect with me <i data-lucide="message-circle" class="h-4 w-4"></i></a>
               <div id="hero-socials" class="flex w-full flex-wrap items-center justify-center gap-x-5 gap-y-3 px-4 sm:w-auto sm:flex-1 sm:pl-6 sm:pr-2"></div>
             </div>
           </div>
@@ -325,40 +337,29 @@
       </div>
     </section>
 
-    <section id="inquiry" class="section-space bg-brand-gray">
+    <section id="proof-of-work" class="section-space dark-band">
       <div class="section-wrap">
-        <div class="reveal grid gap-10 md:grid-cols-[.8fr_1.2fr] md:gap-20">
-          <div>
-            <h2 id="contact-title" class="section-title"></h2>
-            <p id="contact-intro" class="section-copy mt-4 text-sm"></p>
-            <div id="contact-details" class="mt-8 space-y-5"></div>
-            <p id="availability-note" class="mt-8 border-l border-emerald/50 pl-4 text-xs leading-6 text-slate-400"></p>
-          </div>
-          <div class="surface p-5 sm:p-8">
-            <form id="inquiry-form" novalidate>
-              <div class="grid gap-5 sm:grid-cols-2">
-                <label class="block"><span class="mb-2 block text-xs font-medium text-slate-200">Full name <span class="text-emerald-300">*</span></span><input class="form-field" name="name" autocomplete="name" required minlength="2" placeholder="Your name"></label>
-                <label class="block"><span class="mb-2 block text-xs font-medium text-slate-200">Email address <span class="text-emerald-300">*</span></span><input class="form-field" name="email" type="email" autocomplete="email" required placeholder="you@company.com"></label>
-                <label class="block"><span class="mb-2 block text-xs font-medium text-slate-200">Current experience <span class="text-emerald-300">*</span></span><select id="experience-select" class="form-field" name="experience" required></select></label>
-                <label class="block"><span class="mb-2 block text-xs font-medium text-slate-200">Program of interest <span class="text-emerald-300">*</span></span><select id="program-select" class="form-field" name="program" required></select></label>
-                <label class="block sm:col-span-2"><span class="mb-2 block text-xs font-medium text-slate-200">Goals / message <span class="text-emerald-300">*</span></span><textarea class="form-field" name="message" required minlength="20" placeholder="Tell me what you're building and where you want to go."></textarea></label>
-              </div>
-              <div class="mt-5 flex flex-wrap items-center justify-between gap-4">
-                <p class="max-w-xs text-[10px] leading-5 text-slate-500">This demo form shows a local confirmation only. No information is sent or stored.</p>
-                <button class="btn-primary" type="submit">Send inquiry <i data-lucide="arrow-right" class="h-4 w-4"></i></button>
-              </div>
-              <p id="form-status" class="mt-4 hidden rounded border border-emerald/20 bg-emerald/5 px-4 py-3 text-sm text-emerald-100" role="status" aria-live="polite" tabindex="-1"></p>
-            </form>
-          </div>
+        <div class="reveal fade-only mb-10">
+          <p class="mb-3 text-xs font-semibold uppercase tracking-[.18em] text-emerald-200">Campaign evidence</p>
+          <h2 class="section-title">Proof of Work &amp; Verified Results</h2>
         </div>
+        <div id="proof-grid" class="grid grid-cols-1 gap-6 md:grid-cols-2"></div>
       </div>
     </section>
 
   </main>
 
+  <dialog id="proof-lightbox" class="proof-lightbox" aria-labelledby="proof-lightbox-title">
+    <div class="flex items-center justify-between gap-4 border-b border-white/10 px-4 py-3">
+      <h2 id="proof-lightbox-title" class="font-heading text-base"></h2>
+      <button id="proof-lightbox-close" class="rounded border border-white/20 px-3 py-2 text-sm text-slate-200 hover:border-emerald-300" type="button" aria-label="Close media viewer">Close</button>
+    </div>
+    <div id="proof-lightbox-media" class="proof-lightbox-media"></div>
+  </dialog>
+
   <footer class="dark-band border-t border-white/10 py-8">
     <div class="section-wrap flex flex-col gap-5 md:flex-row md:items-center md:justify-between">
-      <div><a id="footer-brand" class="font-heading text-sm font-semibold text-slate-100" href="#top"></a><p class="mt-2 max-w-xl text-[10px] leading-5 text-slate-500"><span id="copyright"></span> <span id="disclosure"></span></p></div>
+      <div><a id="footer-brand" class="font-heading text-sm font-semibold text-slate-100" href="#top"></a><p id="copyright" class="mt-2 max-w-xl text-[10px] leading-5 text-slate-500"></p></div>
       <div id="footer-socials" class="flex items-center gap-4"></div>
     </div>
   </footer>
@@ -382,6 +383,16 @@
       stats: [
         { value: "$15,000", label: "Total Sales" },
         { value: "3,000+", label: "Students in training across Africa" }
+      ],
+      proofResults: [
+        { category: "Selar Sales", headline: "Your verified sales total", caption: "Add the sales figure, date range, and source shown in your Selar dashboard.", media: "assets/proof-1.webp", type: "image" },
+        { category: "Student Result", headline: "A student milestone", caption: "Add an approved student result and the context behind their progress.", media: "assets/proof-2.mp4", type: "video" },
+        { category: "Funnel Metrics", headline: "Your funnel conversion rate", caption: "Add the measured conversion result, funnel stage, and reporting period.", media: "assets/proof-3.webp", type: "image" },
+        { category: "Campaign Performance", headline: "Your campaign return", caption: "Add the verified campaign outcome and the measurement source.", media: "assets/proof-4.webp", type: "image" },
+        { category: "Selar Sales", headline: "A sales growth milestone", caption: "Add a second sales screenshot with its date range and product context.", media: "assets/proof-1.webp", type: "image" },
+        { category: "Student Result", headline: "Another learner success", caption: "Add an approved student story and evidence of the result achieved.", media: "assets/proof-2.mp4", type: "video" },
+        { category: "Funnel Metrics", headline: "A lead-to-sale result", caption: "Add verified lead and sale counts with the period they represent.", media: "assets/proof-3.webp", type: "image" },
+        { category: "Campaign Performance", headline: "A campaign improvement", caption: "Add the campaign evidence, comparison period, and source for this result.", media: "assets/proof-4.webp", type: "image" }
       ],
       about: {
         title: "Experience earned in the campaign trenches.",
@@ -464,30 +475,6 @@
           { number: "03", title: "Conversion assets & automated follow-up", text: "Connect useful pre-sell content to a transparent recommendation and permission-based retention with measurable outcomes." }
         ]
       },
-      programs: {
-        title: "A focused way to work together.",
-        intro: "Engagements begin with fit, goals and existing evidence. The first conversation is a working discussion, not a high-pressure sales call.",
-        items: [
-          {
-            title: "1-on-1 Executive Mentorship", audience: "For active marketers scaling campaigns",
-            description: "A direct advisory partnership for operators who already have live campaigns and want clearer decisions on growth, economics and team execution.",
-            deliverables: ["Private strategy sessions", "Campaign and funnel reviews", "Measurement priorities and action plan"],
-            value: "Individual advisory", icon: "user-round"
-          },
-          {
-            title: "Affiliate Accelerator Cohort", audience: "For marketers ready for structured implementation",
-            description: "A small-group learning environment that pairs guided curriculum with peer feedback and practical campaign audits.",
-            deliverables: ["Live group workshops", "Structured implementation curriculum", "Peer review and campaign audit sessions"],
-            value: "Cohort mentorship", icon: "users-round"
-          },
-          {
-            title: "Brand & Vendor Consulting", audience: "For businesses building affiliate programs",
-            description: "Strategic support for teams refining partner positioning, onboarding, enablement and the quality of their publisher ecosystem.",
-            deliverables: ["Program and partner journey review", "Publisher enablement recommendations", "Measurement and compliance framework"],
-            value: "Business consulting", icon: "building-2"
-          }
-        ]
-      },
       testimonials: {
         title: "Progress built on better decisions.",
         note: "The names, quotes and outcomes below are illustrative composite examples, not real testimonials. Publish only with accurate attribution and explicit client approval.",
@@ -506,22 +493,7 @@
           { type: "Reference · 9 min", title: "A measurement plan that travels", text: "Keep acquisition, partner conversion and retention signals visible in one simple campaign measurement routine.", icon: "chart-no-axes-combined", url: "https://support.google.com/analytics/answer/10089681" }
         ]
       },
-      contact: {
-        title: "Tell me what you're building.",
-        intro: "Share a little context about your audience, current activity and the decision you're working through. I'll review the fit and suggest a useful next step.",
-        email: "hello@coachdavid.example",
-        whatsapp: "https://wa.me/15550100123",
-        availability: "Consultation availability: limited advisory conversations each month. Typical response window: two business days.",
-        emailLabel: "Email",
-        whatsappLabel: "WhatsApp",
-        emailNote: "Demo address — replace before publishing",
-        whatsappNote: "Demo contact — replace before publishing",
-        experienceLevels: ["Select your experience level", "Exploring affiliate marketing", "Building my first campaign", "Running active campaigns", "Managing a partner program"],
-        programPlaceholder: "Select a program of interest",
-        submitConfirmation: "Thanks for sharing your context. This demo form has validated your message locally; no information was sent. Connect an approved form endpoint before publishing."
-      },
       footer: {
-        disclosure: "Affiliate disclosure: some recommendations may include partner links. Any commercial relationship should be disclosed clearly at the point of recommendation. Demo content and results shown above are illustrative.",
         copyright: "© 2026 Coach David. All rights reserved."
       },
       filters: ["All Campaigns", "Organic Content", "Paid Acquisition", "Funnel Optimization"]
@@ -550,8 +522,8 @@
       const data = PORTFOLIO_DATA;
       $("#brand").innerHTML = `<img class="header-brand-avatar" src="${safeHref(data.person.avatar)}" alt=""><span class="border-l border-white/20 pl-3 font-heading text-sm font-bold tracking-tight text-slate-100">${escapeHTML(data.person.name)}</span>`;
       $("#footer-brand").textContent = data.person.name;
-      $("#header-cta").href = "#inquiry";
-      $("#advisory-cta").href = "#inquiry";
+      $("#header-cta").href = "#proof-of-work";
+      $("#advisory-cta").href = "#proof-of-work";
       const headline = $("#hero-headline");
       setTypewriterText(headline, data.person.headline);
       $("#portrait-image").src = data.person.portrait;
@@ -569,18 +541,31 @@
         return `<a href="${safeHref(item.url)}" target="_blank" rel="noopener noreferrer" aria-label="${escapeHTML(item.label)} (${label})" class="text-slate-400 transition hover:text-emerald-200"><i class="social-brand-icon fa-brands fa-${escapeHTML(item.icon)}" aria-hidden="true"></i></a>`;
       }).join("");
       $("#stats-grid").innerHTML = data.stats.map(stat => `<div class="stat-cell"><span class="stat-value">${escapeHTML(stat.value)}</span><span class="stat-label">${escapeHTML(stat.label)}</span></div>`).join("");
+      $("#proof-grid").innerHTML = data.proofResults.map((item, index) => {
+        const media = item.type === "video"
+          ? `<video src="${safeHref(item.media)}" autoplay muted loop playsinline preload="metadata" aria-label="${escapeHTML(item.headline)}"></video>`
+          : `<img src="${safeHref(item.media)}" alt="${escapeHTML(item.headline)}" loading="lazy">`;
+        return `<button class="proof-card surface rounded-lg reveal" type="button" data-proof-index="${index}" aria-label="Inspect proof: ${escapeHTML(item.headline)}">
+          <span class="proof-media-frame aspect-video">
+            ${media}
+            <span class="proof-media-fallback hidden">Add proof media at <code>${escapeHTML(item.media)}</code></span>
+          </span>
+          <span class="mt-5 inline-flex rounded-full border border-emerald/30 bg-emerald/5 px-3 py-1 text-[10px] font-semibold uppercase tracking-[.12em] text-emerald-200">${escapeHTML(item.category)}</span>
+          <strong class="mt-3 block font-heading text-xl font-semibold text-slate-100">${escapeHTML(item.headline)}</strong>
+          <span class="proof-caption mt-2 block text-sm leading-relaxed text-slate-400" title="${escapeHTML(item.caption)}">${escapeHTML(item.caption)}</span>
+        </button>`;
+      }).join("");
+      $$(".proof-media-frame > img, .proof-media-frame > video").forEach(media => {
+        media.addEventListener("error", () => {
+          media.hidden = true;
+          media.parentElement.querySelector(".proof-media-fallback").classList.remove("hidden");
+        }, { once: true });
+      });
       $("#about-title").textContent = data.about.title;
       $("#about-lead").textContent = data.about.lead;
       $("#about-story").innerHTML = data.about.story.map(paragraph => `<p>${escapeHTML(paragraph)}</p>`).join("");
       $("#about-quote").textContent = data.about.quote;
-      $("#contact-title").textContent = data.contact.title;
-      setTypewriterText($("#contact-intro"), data.contact.intro);
-      $("#contact-details").innerHTML = `<div class="flex items-start gap-3"><span class="icon-box h-9 w-9"><i data-lucide="mail" class="h-4 w-4"></i></span><div><p class="text-xs font-medium">${escapeHTML(data.contact.emailLabel)}</p><a class="mt-1 block text-xs text-emerald-200 hover:text-emerald-100" href="mailto:${escapeHTML(data.contact.email)}">${escapeHTML(data.contact.email)}</a><p class="mt-1 text-[10px] text-slate-500">${escapeHTML(data.contact.emailNote)}</p></div></div><div class="flex items-start gap-3"><span class="icon-box h-9 w-9"><i data-lucide="message-circle" class="h-4 w-4"></i></span><div><p class="text-xs font-medium">${escapeHTML(data.contact.whatsappLabel)}</p><a class="mt-1 block text-xs text-emerald-200 hover:text-emerald-100" href="${safeHref(data.contact.whatsapp)}" target="_blank" rel="noopener noreferrer">Open demo contact</a><p class="mt-1 text-[10px] text-slate-500">${escapeHTML(data.contact.whatsappNote)}</p></div></div>`;
-      setTypewriterText($("#availability-note"), data.contact.availability);
-      $("#experience-select").innerHTML = data.contact.experienceLevels.map((level, index) => `<option value="${index === 0 ? "" : escapeHTML(level)}" ${index === 0 ? "disabled selected" : ""}>${escapeHTML(level)}</option>`).join("");
-      $("#program-select").innerHTML = `<option value="" disabled selected>${escapeHTML(data.contact.programPlaceholder)}</option>` + data.programs.items.map(program => `<option value="${escapeHTML(program.title)}">${escapeHTML(program.title)}</option>`).join("");
       $("#copyright").textContent = data.footer.copyright;
-      $("#disclosure").textContent = data.footer.disclosure;
       if (window.lucide) window.lucide.createIcons();
     }
 
@@ -607,22 +592,41 @@
           typeNextCharacter();
         });
       }
-      const form = $("#inquiry-form");
-      form.addEventListener("input", event => {
-        if (event.target.matches("input, select, textarea")) event.target.setCustomValidity("");
-        $("#form-status").classList.add("hidden");
+      const proofLightbox = $("#proof-lightbox");
+      const proofLightboxTitle = $("#proof-lightbox-title");
+      const proofLightboxMedia = $("#proof-lightbox-media");
+      $("#proof-grid").addEventListener("click", event => {
+        const card = event.target.closest("[data-proof-index]");
+        if (!card) return;
+        const proof = PORTFOLIO_DATA.proofResults[Number(card.dataset.proofIndex)];
+        if (!proof) return;
+        proofLightboxTitle.textContent = `${proof.category}: ${proof.headline}`;
+        const media = document.createElement(proof.type === "video" ? "video" : "img");
+        media.src = proof.media;
+        if (proof.type === "video") {
+          media.autoplay = true;
+          media.muted = true;
+          media.loop = true;
+          media.playsInline = true;
+          media.controls = true;
+          media.setAttribute("aria-label", proof.headline);
+        } else {
+          media.alt = proof.headline;
+        }
+        media.addEventListener("error", () => {
+          const fallback = document.createElement("p");
+          fallback.className = "proof-media-fallback";
+          fallback.textContent = `Add proof media at ${proof.media}`;
+          proofLightboxMedia.replaceChildren(fallback);
+        }, { once: true });
+        proofLightboxMedia.replaceChildren(media);
+        proofLightbox.showModal();
       });
-      form.addEventListener("submit", event => {
-        event.preventDefault();
-        $("#form-status").classList.add("hidden");
-        if (!form.reportValidity()) return;
-        $("#form-status").textContent = PORTFOLIO_DATA.contact.submitConfirmation;
-        $("#form-status").classList.remove("hidden");
-        form.reset();
-        $("#experience-select").selectedIndex = 0;
-        $("#program-select").selectedIndex = 0;
-        $("#form-status").focus({ preventScroll: true });
+      $("#proof-lightbox-close").addEventListener("click", () => proofLightbox.close());
+      proofLightbox.addEventListener("click", event => {
+        if (event.target === proofLightbox) proofLightbox.close();
       });
+      proofLightbox.addEventListener("close", () => proofLightboxMedia.replaceChildren());
 
       const revealItems = $$(".reveal");
       if ("IntersectionObserver" in window && !window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
