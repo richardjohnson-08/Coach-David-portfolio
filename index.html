@@ -105,15 +105,16 @@
     .dark-band .stat-cell { border-color: rgba(255,255,255,.15); }
     .stat-value { display: block; color: #ffde00; font: 800 clamp(1.3rem, 2.5vw, 1.8rem)/1.2 Inter, Arial, sans-serif; letter-spacing: -.03em; }
     .stat-label { display: block; margin-top: 9px; color: #d1d5db; font-size: 11px; line-height: 1.55; }
-    .proof-track { overflow-x: auto; overflow-y: hidden; scroll-snap-type: x mandatory; scrollbar-width: none; -ms-overflow-style: none; overscroll-behavior-x: contain; }
+    .proof-track { overflow-x: auto; overflow-y: hidden; scroll-snap-type: x mandatory; scrollbar-width: none; -ms-overflow-style: none; overscroll-behavior-x: contain; padding: 18px max(18px, calc((100% - 220px) / 2)); }
     .proof-track::-webkit-scrollbar { display: none; }
     .proof-section-wrap { width: min(1640px,calc(100% - 48px)); margin-inline: auto; }
-    .proof-card { flex: 0 0 220px; height: 372px; display: grid; place-items: center; padding: 0; border: 1px solid rgba(249,250,251,.62); border-radius: 10px; background: transparent; color: inherit; cursor: zoom-in; scroll-snap-align: start; }
+    .proof-card { flex: 0 0 220px; height: 372px; display: grid; place-items: center; padding: 0; border: 1px solid rgba(249,250,251,.62); border-radius: 10px; background: transparent; color: inherit; cursor: zoom-in; scroll-snap-align: center; opacity: .62; filter: brightness(.76); transform: translateY(10px) scale(.96); transition: opacity .25s ease, filter .25s ease, transform .25s ease; }
+    .proof-card.is-active { position: relative; z-index: 1; opacity: 1; filter: brightness(1.08); transform: translateY(-4px) scale(1.035); }
     .proof-media-frame { position: relative; display: grid; height: 100%; aspect-ratio: 9 / 16; place-items: center; overflow: hidden; border: 1px solid rgba(249,250,251,.72); border-radius: 8px; background: #0b0f14; }
     .proof-media-frame > img, .proof-media-frame > video { width: 100%; height: 100%; object-fit: contain; }
     @media (min-width: 1024px) {
-      .proof-track { gap: 16px; overflow-x: hidden; }
-      .proof-card { flex: 1 1 0; height: auto; }
+      .proof-track { gap: 16px; padding-inline: max(24px, calc((100% - clamp(240px, 24vw, 320px)) / 2)); }
+      .proof-card { flex: 0 0 clamp(240px, 24vw, 320px); height: auto; }
       .proof-media-frame { width: 100%; height: auto; }
     }
     .proof-media-fallback { position: absolute; inset: 0; background: #0b0f14; }
@@ -220,7 +221,10 @@
     .section-space { padding-block: 112px; }
     .font-heading { font-family: Georgia, "Times New Roman", serif !important; font-weight: 400 !important; letter-spacing: -.025em !important; }
     .section-title { color: #f9fafb; font: 400 clamp(2rem,4vw,3.1rem)/1.15 Georgia, "Times New Roman", serif; letter-spacing: -.025em; }
-    #hero-headline { min-height: 0; color: #f9fafb; font: 400 1rem/1.625 Arial, Helvetica, sans-serif; letter-spacing: normal; white-space: pre-line; }
+    #hero-headline { position: relative; min-height: 0; color: #f9fafb; font: 400 1rem/1.625 Arial, Helvetica, sans-serif; letter-spacing: normal; white-space: pre-line; }
+    .typewriter-layout, .typewriter-visible { display: block; white-space: pre-line; }
+    .typewriter-layout { visibility: hidden; }
+    .typewriter-visible { position: absolute; inset: 0; }
     @media (min-width: 768px) { #hero-headline { font-size: 1.125rem; } }
     .surface { border: 1px solid rgba(148,163,184,.15); border-radius: 8px !important; background: #111827; box-shadow: none; }
     .dark-band { background: #0b0f19; color: #f9fafb; }
@@ -350,9 +354,8 @@
 
   </main>
 
-  <dialog id="proof-lightbox" class="proof-lightbox" aria-labelledby="proof-lightbox-title">
+  <dialog id="proof-lightbox" class="proof-lightbox" aria-label="Student review image viewer">
     <div class="flex items-center justify-between gap-4 border-b border-white/10 px-4 py-3">
-      <h2 id="proof-lightbox-title" class="font-heading text-base">Student review media</h2>
       <button id="proof-lightbox-close" class="rounded border border-white/20 px-3 py-2 text-sm text-slate-200 hover:border-emerald-300" type="button" aria-label="Close media viewer">Close</button>
     </div>
     <div id="proof-lightbox-media" class="proof-lightbox-media"></div>
@@ -515,7 +518,7 @@ I teach practical digital skills that help everyday people build sustainable inc
     const setTypewriterText = (element, text) => {
       element.classList.add("typewriter-target");
       element.dataset.typewriterText = text;
-      element.innerHTML = `<span class="sr-only">${escapeHTML(text)}</span><span class="typewriter-visible" aria-hidden="true"></span>`;
+      element.innerHTML = `<span class="sr-only">${escapeHTML(text)}</span><span class="typewriter-layout" aria-hidden="true">${escapeHTML(text)}</span><span class="typewriter-visible" aria-hidden="true"></span>`;
     };
 
     function renderPortfolio() {
@@ -549,7 +552,7 @@ I teach practical digital skills that help everyday people build sustainable inc
         const media = item.type === "video"
           ? `<video src="${safeHref(item.media)}" autoplay muted loop playsinline preload="metadata" aria-label="${escapeHTML(item.headline)}"></video>`
           : `<img src="${safeHref(item.media)}" alt="${escapeHTML(item.headline)}" loading="lazy">`;
-        return `<button class="proof-card" type="button" data-proof-index="${index}" aria-label="Open student win: ${escapeHTML(item.headline)}">
+        return `<button class="proof-card${index === 0 ? " is-active" : ""}" type="button" data-proof-index="${index}" aria-label="Open student win: ${escapeHTML(item.headline)}">
           <span class="proof-media-frame aspect-[9/16]">
             ${media}
             <span class="proof-media-fallback hidden" aria-hidden="true"></span>
@@ -590,14 +593,12 @@ I teach practical digital skills that help everyday people build sustainable inc
         });
       }
       const proofLightbox = $("#proof-lightbox");
-      const proofLightboxTitle = $("#proof-lightbox-title");
       const proofLightboxMedia = $("#proof-lightbox-media");
       $("#proof-grid").addEventListener("click", event => {
         const card = event.target.closest("[data-proof-index]");
         if (!card) return;
         const proof = PORTFOLIO_DATA.proofResults[Number(card.dataset.proofIndex)];
         if (!proof) return;
-        proofLightboxTitle.textContent = proof.headline;
         const media = document.createElement(proof.type === "video" ? "video" : "img");
         media.src = proof.media;
         if (proof.type === "video") {
@@ -621,6 +622,32 @@ I teach practical digital skills that help everyday people build sustainable inc
         if (event.target === proofLightbox) proofLightbox.close();
       });
       proofLightbox.addEventListener("close", () => proofLightboxMedia.replaceChildren());
+
+      const proofTrack = $("#proof-grid");
+      const proofCards = $$(".proof-card", proofTrack);
+      let proofScrollFrame = 0;
+      const updateActiveProof = () => {
+        proofScrollFrame = 0;
+        const trackCenter = proofTrack.getBoundingClientRect().left + proofTrack.clientWidth / 2;
+        let closestCard = null;
+        let closestDistance = Infinity;
+        proofCards.forEach(card => {
+          const rect = card.getBoundingClientRect();
+          const distance = Math.abs(rect.left + rect.width / 2 - trackCenter);
+          if (distance < closestDistance) {
+            closestCard = card;
+            closestDistance = distance;
+          }
+        });
+        proofCards.forEach(card => card.classList.toggle("is-active", card === closestCard));
+      };
+      const scheduleActiveProofUpdate = () => {
+        if (proofScrollFrame) return;
+        proofScrollFrame = window.requestAnimationFrame(updateActiveProof);
+      };
+      proofTrack.addEventListener("scroll", scheduleActiveProofUpdate, { passive: true });
+      window.addEventListener("resize", scheduleActiveProofUpdate, { passive: true });
+      updateActiveProof();
 
       const revealItems = $$(".reveal");
       if ("IntersectionObserver" in window && !window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
