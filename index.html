@@ -205,7 +205,6 @@
     main { display: flex; flex-direction: column; }
     #top { order: 1; background: radial-gradient(ellipse at 68% 4%, rgba(16,185,129,.1), transparent 36%), #0b0f19; }
     #metrics { order: 2; background: #0b0f19; }
-    #about { order: 3; background: #0b0f19; }
     #case-studies { order: 5; background: #0e1420; }
     #methodology { order: 6; background: #0b0f19; }
     #advisory { order: 7; background: #0e1420; }
@@ -215,7 +214,7 @@
     .section-space { padding-block: 112px; }
     .font-heading { font-family: Georgia, "Times New Roman", serif !important; font-weight: 400 !important; letter-spacing: -.025em !important; }
     .section-title { color: #f9fafb; font: 400 clamp(2rem,4vw,3.1rem)/1.15 Georgia, "Times New Roman", serif; letter-spacing: -.025em; }
-    #hero-headline { min-height: 0; color: #f9fafb; font: 400 1rem/1.625 Arial, Helvetica, sans-serif; letter-spacing: normal; }
+    #hero-headline { min-height: 0; color: #f9fafb; font: 400 1rem/1.625 Arial, Helvetica, sans-serif; letter-spacing: normal; white-space: pre-line; }
     @media (min-width: 768px) { #hero-headline { font-size: 1.125rem; } }
     .surface { border: 1px solid rgba(148,163,184,.15); border-radius: 8px !important; background: #111827; box-shadow: none; }
     .dark-band { background: #0b0f19; color: #f9fafb; }
@@ -316,22 +315,6 @@
       </div>
     </section>
 
-    <section id="about" class="section-space bg-brand-gray">
-      <div class="section-wrap max-w-4xl">
-        <div class="reveal fade-only mb-12 text-center">
-          <h2 id="about-title" class="section-title"></h2>
-          <div class="mx-auto mt-6 h-1 w-12 bg-brand-blue"></div>
-        </div>
-        <div class="surface reveal fade-only delay-100 space-y-5 border border-gray-100 p-8 text-base leading-relaxed text-gray-700 shadow-xl md:p-12 md:text-lg">
-          <p id="about-lead" class="text-2xl font-bold text-brand-navy"></p>
-          <div id="about-story" class="space-y-5"></div>
-          <div class="dark-band relative mt-8 border-l-4 border-brand-yellow p-7 md:p-9">
-            <p id="about-quote" class="relative z-10 text-lg italic leading-relaxed text-white md:text-xl"></p>
-          </div>
-        </div>
-      </div>
-    </section>
-
     <section id="metrics" class="dark-band px-6 py-12 md:px-12 md:py-16" aria-label="Coach David's performance metrics">
       <div class="section-wrap">
         <div id="stats-grid" class="mx-auto grid max-w-3xl grid-cols-2"></div>
@@ -367,7 +350,9 @@
         name: "Coach David",
         monogram: "",
         role: "Digital Marketer & Affiliate Marketing Coach",
-        headline: "I’m Coach David, an affiliate marketer with over $15,000 in personal sales and 3,000+ students in training across Africa. I teach practical digital skills that help everyday people build sustainable affiliate businesses they can actually rely on and earn from.",
+        headline: `Hello, my name is David Emelike, popularly known as Coach David in the digital space. Even though I started off with limited capital and just a smartphone, I have built a career as a digital entrepreneur—generating over $15,000 from digital product sales and mentoring over 3,000 students across Africa to land their first online sales and build consistent monthly income.
+
+I teach practical digital skills that help everyday people build sustainable income online, ranging from affiliate marketing to ghostwriting, copywriting, and more. I am committed to helping more people see the value of having a digital skill and finding real ways to monetize it. Come work with me to get started on your journey.`,
         portrait: "assets/coach-david.jpg",
         avatar: "assets/coach-david-avatar.jpg",
         social: [
@@ -391,16 +376,6 @@
         { media: "assets/proof-3.webp", type: "image" },
         { media: "assets/proof-4.webp", type: "image" }
       ],
-      about: {
-        title: "Experience earned in the campaign trenches.",
-        lead: "Hi, ambitious affiliate marketer.",
-        quote: "A click is only the beginning. Sustainable growth comes from earning trust, guiding a good decision, and staying useful after the sale.",
-        story: [
-          "My work began on the operator side: buying media, evaluating offers and learning what happens when a campaign meets real people. That experience taught me that a strong affiliate business is built on more than a clever hook or a temporary traffic advantage.",
-          "Over time, I moved from running individual campaigns to teaching the systems behind them. Today I work with marketers and partner teams to make offer selection, audience education, measurement and follow-up function as one coherent operating model.",
-          "My approach is deliberately durable: position offers honestly, acquire traffic with a clear view of its economics, then earn the next conversation through useful content and thoughtful retention. Compliance isn't a footnote — it's part of the strategy."
-        ],
-      },
       caseStudies: [
         {
           id: "creator-education", category: "Organic Content", vertical: "Creator education",
@@ -555,10 +530,6 @@
           media.parentElement.querySelector(".proof-media-fallback").classList.remove("hidden");
         }, { once: true });
       });
-      $("#about-title").textContent = data.about.title;
-      $("#about-lead").textContent = data.about.lead;
-      $("#about-story").innerHTML = data.about.story.map(paragraph => `<p>${escapeHTML(paragraph)}</p>`).join("");
-      $("#about-quote").textContent = data.about.quote;
       $("#copyright").textContent = data.footer.copyright;
       if (window.lucide) window.lucide.createIcons();
     }
