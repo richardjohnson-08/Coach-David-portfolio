@@ -365,7 +365,7 @@
   <header class="portfolio-header sticky top-0 z-50 border-b border-white/10 backdrop-blur-xl">
     <div class="section-wrap flex h-[72px] items-center justify-between gap-5">
       <a id="brand" class="flex shrink-0 items-center gap-3" href="#top" aria-label="Go to homepage"></a>
-      <a id="header-cta" class="btn-primary !min-h-[48px] !px-6 text-xs sm:text-sm" href="#proof-of-work">Let's Connect <i data-lucide="arrow-up-right" class="h-4 w-4"></i></a>
+      <a id="header-cta" class="btn-primary !min-h-[48px] !px-6 text-xs sm:text-sm" href="#contact">Let's Connect <i data-lucide="arrow-up-right" class="h-4 w-4"></i></a>
     </div>
   </header>
 
@@ -631,7 +631,7 @@
       const data = PORTFOLIO_DATA;
       $("#brand").innerHTML = `<img class="header-brand-avatar" src="${safeHref(data.person.avatar)}" alt=""><span class="border-l border-white/20 pl-3 font-heading text-sm font-bold tracking-tight text-slate-100">${escapeHTML(data.person.name)}</span>`;
       $("#footer-brand").textContent = data.person.name;
-      $("#header-cta").href = "#proof-of-work";
+      $("#header-cta").href = "#contact";
       $("#advisory-cta").href = "#proof-of-work";
       const headline = $("#hero-headline");
       setTypewriterText(headline, data.person.headline);
