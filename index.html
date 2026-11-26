@@ -108,9 +108,9 @@
     .proof-track { overflow-x: auto; overflow-y: hidden; scroll-snap-type: x mandatory; scrollbar-width: none; -ms-overflow-style: none; overscroll-behavior-x: contain; padding: 18px max(18px, calc((100% - 220px) / 2)); }
     .proof-track::-webkit-scrollbar { display: none; }
     .proof-section-wrap { width: min(1640px,calc(100% - 48px)); margin-inline: auto; }
-    .proof-card { flex: 0 0 220px; height: 372px; display: grid; place-items: center; padding: 0; border: 1px solid rgba(249,250,251,.62); border-radius: 10px; background: transparent; color: inherit; cursor: zoom-in; scroll-snap-align: center; opacity: .62; filter: brightness(.76); transform: translateY(10px) scale(.96); transition: opacity .25s ease, filter .25s ease, transform .25s ease; }
+    .proof-card { flex: 0 0 220px; height: 372px; display: grid; place-items: center; padding: 0; border: 0; border-radius: 10px; background: transparent; color: inherit; cursor: zoom-in; scroll-snap-align: center; opacity: .62; filter: brightness(.76); transform: translateY(10px) scale(.96); transition: opacity .25s ease, filter .25s ease, transform .25s ease; }
     .proof-card.is-active { position: relative; z-index: 1; opacity: 1; filter: brightness(1.08); transform: translateY(-4px) scale(1.035); }
-    .proof-media-frame { position: relative; display: grid; height: 100%; aspect-ratio: 9 / 16; place-items: center; overflow: hidden; border: 1px solid rgba(249,250,251,.72); border-radius: 8px; background: #0b0f14; }
+    .proof-media-frame { position: relative; display: grid; height: 100%; aspect-ratio: 9 / 16; place-items: center; overflow: hidden; border: 1px solid #10b981; border-radius: 8px; background: #0b0f14; }
     .proof-media-frame > img, .proof-media-frame > video { width: 100%; height: 100%; object-fit: contain; }
     @media (min-width: 1024px) {
       .proof-track { gap: 16px; padding-inline: max(24px, calc((100% - clamp(240px, 24vw, 320px)) / 2)); }
@@ -349,7 +349,10 @@
 
     <section id="proof-of-work" class="section-space dark-band">
       <div class="proof-section-wrap">
-        <div id="proof-grid" class="proof-track flex gap-3" tabindex="0" role="region" aria-label="Scrollable student reviews"></div>
+        <div class="surface proof-results-box">
+          <h2 class="section-title text-center">Students Wins</h2>
+          <div id="proof-grid" class="proof-track flex gap-3" tabindex="0" role="region" aria-label="Scrollable student reviews"></div>
+        </div>
       </div>
     </section>
 
