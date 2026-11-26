@@ -119,6 +119,13 @@
     .skills-ribbon-separator { color: #10b981; }
     .skills-ribbon:hover .skills-ribbon-track { animation-play-state: paused; }
     @keyframes skills-ribbon-scroll { to { transform: translateX(-50%); } }
+    .success-story-wrap { width: min(1040px,calc(100% - 48px)); margin: 0 auto 72px; }
+    .success-story-card { position: relative; isolation: isolate; overflow: hidden; padding: clamp(26px,5vw,56px); border: 1px solid rgba(16,185,129,.3); border-radius: 18px; background: linear-gradient(135deg,rgba(17,24,39,.94),rgba(8,18,24,.92)); box-shadow: 0 0 44px rgba(16,185,129,.1), 0 20px 60px rgba(0,0,0,.24); }
+    .success-story-card::before { content: ""; position: absolute; z-index: 0; top: -50%; right: -18%; width: min(70%,560px); aspect-ratio: 1; border-radius: 50%; background: radial-gradient(circle,rgba(16,185,129,.2),rgba(45,212,191,.1) 34%,transparent 70%); filter: blur(40px); pointer-events: none; }
+    .success-story-card > * { position: relative; z-index: 1; }
+    .success-story-kicker { color: #34d399; font-size: 11px; font-weight: 700; letter-spacing: .14em; }
+    .success-story-title { max-width: 760px; margin: 14px 0 18px; color: #f9fafb; font: 700 clamp(2rem,5vw,3.5rem)/1.08 Inter,Arial,sans-serif; letter-spacing: -.04em; }
+    .success-story-copy { max-width: 760px; margin: 0; color: #cbd5e1; font-size: clamp(.95rem,1.5vw,1.05rem); line-height: 1.75; }
     .proof-card { position: relative; flex: 0 0 220px; height: 372px; display: grid; place-items: center; padding: 0; border: 0; border-radius: 10px; background: transparent; color: inherit; cursor: zoom-in; scroll-snap-align: center; opacity: .62; filter: brightness(.76); transform: translateY(10px) scale(.96); transition: opacity .25s ease, filter .25s ease, transform .25s ease; }
     .proof-card.is-active { position: relative; z-index: 1; opacity: 1; filter: brightness(1.08); transform: translateY(-4px) scale(1.035); }
     .proof-media-frame { position: relative; display: grid; height: 100%; aspect-ratio: 9 / 16; place-items: center; overflow: hidden; border: 1px solid #10b981; border-radius: 8px; background: #0b0f14; }
@@ -412,15 +419,22 @@
       <div class="skills-ribbon" role="region" aria-label="Skills and services">
         <div class="skills-ribbon-track">
           <div class="skills-ribbon-group">
-            <span>✦ AFFILIATE MARKETING</span><span class="skills-ribbon-separator">•</span>
-            <span>✦ GHOSTWRITING</span><span class="skills-ribbon-separator">•</span>
+            <span>AFFILIATE MARKETING</span><span class="skills-ribbon-separator">•</span>
+            <span>GHOSTWRITING</span><span class="skills-ribbon-separator">•</span>
             <span>DIGITAL ENTREPRENEUR</span>
           </div>
           <div class="skills-ribbon-group" aria-hidden="true">
-            <span>✦ AFFILIATE MARKETING</span><span class="skills-ribbon-separator">•</span>
-            <span>✦ GHOSTWRITING</span><span class="skills-ribbon-separator">•</span>
+            <span>AFFILIATE MARKETING</span><span class="skills-ribbon-separator">•</span>
+            <span>GHOSTWRITING</span><span class="skills-ribbon-separator">•</span>
             <span>DIGITAL ENTREPRENEUR</span>
           </div>
+        </div>
+      </div>
+      <div class="success-story-wrap">
+        <div class="success-story-card">
+          <p class="success-story-kicker">STUDENT SUCCESS STORIES</p>
+          <h2 class="success-story-title">Real People. Real Growth. Remarkable Results.</h2>
+          <p class="success-story-copy">Behind every result is a story of learning, determination, guidance, and consistent action. Discover the journeys of individuals who have taken steps towards building something meaningful through digital skills.</p>
         </div>
       </div>
       <div class="proof-section-wrap">
