@@ -253,7 +253,9 @@
     .expertise-list { list-style: none; padding-left: 0; }
     .expertise-list li { position: relative; padding-left: 1.4rem; }
     .expertise-list li::before { content: ""; position: absolute; top: .7em; left: 0; width: 7px; height: 7px; border-radius: 50%; background: #10b981; box-shadow: 0 0 12px rgba(16,185,129,.65); }
-    .expertise-list .typewriter-visible { left: 1.4rem; }
+    .expertise-list li:nth-child(2) { transition-delay: 100ms; }
+    .expertise-list li:nth-child(3) { transition-delay: 200ms; }
+    .expertise-list li:nth-child(4) { transition-delay: 300ms; }
     @media (min-width: 768px) { #hero-headline { font-size: 1.25rem; } }
     .surface { border: 1px solid rgba(148,163,184,.15); border-radius: 8px !important; background: #111827; box-shadow: none; }
     .dark-band { background: #0b0f19; color: #f9fafb; }
@@ -411,7 +413,7 @@
           <div class="mx-auto mt-6 h-1 w-12 bg-emerald-500"></div>
         </div>
         <div class="surface reveal fade-only delay-100 space-y-5 p-8 text-base leading-relaxed text-gray-700 md:p-12 md:text-lg">
-          <ul id="about-story" class="expertise-list typewriter-sequence space-y-5"></ul>
+          <ul id="about-story" class="expertise-list space-y-5"></ul>
           <div class="dark-band relative mt-8 border-l-4 border-amber-400 p-7 md:p-9">
             <p id="about-quote" class="relative z-10 text-lg italic leading-relaxed text-white md:text-xl"></p>
           </div>
@@ -482,7 +484,7 @@
         name: "Coach David",
         monogram: "",
         role: "Digital Marketer & Affiliate Marketing Coach",
-        headline: `Hello, my name is David Emelike, popularly known as Coach David in the digital space. Even though I started off with limited capital and just a smartphone, I have built a career as a digital entrepreneur—generating over $15,000 from digital product sales and mentoring over 3,000 students across Africa to build consistent monthly income from various digital skills. I teach practical ways to everyday people to make money online, ranging from affiliate marketing, Ghostwriting, and many other digital skills. I am committed to helping more people see the value of having a digital skill and finding real ways to monetize it. Come work with me to get started on your digital journey.`,
+        headline: `Hello, my name is David Emelike, popularly known as Coach David in the digital space. Even though I started off with limited capital and just a smartphone, I have built a career as a digital entrepreneur—generating over $15,000 from digital product sales and mentoring over 3,000 students across Africa to build consistent monthly income from various digital skills. I teach practical ways to everyday people on how to make money online, ranging from affiliate marketing, Ghostwriting, and many other digital skills. I am committed to helping more people see the value of having a digital skill and finding real ways to monetize it. Come work with me to get started on your digital journey.`,
         portrait: "assets/coach-david.jpg",
         avatar: "assets/coach-david-avatar.jpg",
         social: [
@@ -641,10 +643,7 @@
       $("#portrait-name").textContent = data.person.name;
       $("#portrait-role").textContent = data.person.role;
       $("#about-title").textContent = data.about.title;
-      $("#about-story").innerHTML = data.about.story.map(item => `<li>${escapeHTML(item)}</li>`).join("");
-      $$("#about-story li").forEach((item, index) => {
-        setTypewriterText(item, data.about.story[index]);
-      });
+      $("#about-story").innerHTML = data.about.story.map(item => `<li class="reveal fade-only">${escapeHTML(item)}</li>`).join("");
       $("#about-quote").textContent = data.about.quote;
       const socialMarkup = data.person.social.map(item => {
         const label = item.label === "WhatsApp" ? "demo contact" : "demo profile";
@@ -679,9 +678,7 @@
     }
 
     function setupInteractions() {
-      const allTypewriterTargets = $$(".typewriter-target");
-      const typewriterSequences = $$(".typewriter-sequence");
-      const typewriterTargets = allTypewriterTargets.filter(target => !target.closest(".typewriter-sequence"));
+      const typewriterTargets = $$(".typewriter-target");
       function startTypewriter(element) {
         const output = $(".typewriter-visible", element);
         const text = element.dataset.typewriterText;
@@ -702,12 +699,6 @@
           }
           typeNextCharacter();
         });
-      }
-      function startTypewriterSequence(sequence) {
-        return $$(".typewriter-target", sequence).reduce(
-          (pending, target) => pending.then(() => startTypewriter(target)),
-          Promise.resolve()
-        );
       }
       const proofLightbox = $("#proof-lightbox");
       const proofLightboxMedia = $("#proof-lightbox-media");
@@ -784,8 +775,6 @@
             if (entry.isIntersecting) {
               if (entry.target.matches(".typewriter-target")) {
                 startTypewriter(entry.target);
-              } else if (entry.target.matches(".typewriter-sequence")) {
-                startTypewriterSequence(entry.target);
               } else {
                 entry.target.classList.add("is-visible");
               }
@@ -793,10 +782,10 @@
             }
           });
         }, { threshold: .12 });
-        [...revealItems, ...typewriterTargets, ...typewriterSequences].forEach(item => observer.observe(item));
+        [...revealItems, ...typewriterTargets].forEach(item => observer.observe(item));
       } else {
         revealItems.forEach(item => item.classList.add("is-visible"));
-        allTypewriterTargets.forEach(item => {
+        typewriterTargets.forEach(item => {
           $(".typewriter-visible", item).textContent = item.dataset.typewriterText;
         });
       }
