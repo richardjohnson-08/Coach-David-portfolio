@@ -107,11 +107,31 @@
     .stat-label { display: block; margin-top: 9px; color: #d1d5db; font-size: 11px; line-height: 1.55; }
     .proof-track { overflow-x: auto; overflow-y: hidden; scroll-snap-type: x mandatory; scrollbar-width: none; -ms-overflow-style: none; overscroll-behavior-x: contain; padding: 18px max(18px, calc((100% - 220px) / 2)); }
     .proof-track::-webkit-scrollbar { display: none; }
-    .proof-section-wrap { width: min(1640px,calc(100% - 48px)); margin-inline: auto; }
-    .proof-card { flex: 0 0 220px; height: 372px; display: grid; place-items: center; padding: 0; border: 0; border-radius: 10px; background: transparent; color: inherit; cursor: zoom-in; scroll-snap-align: center; opacity: .62; filter: brightness(.76); transform: translateY(10px) scale(.96); transition: opacity .25s ease, filter .25s ease, transform .25s ease; }
+    .proof-section-wrap { position: relative; z-index: 1; width: min(1640px,calc(100% - 48px)); margin-inline: auto; }
+    #proof-of-work { position: relative; isolation: isolate; background-color: #0b0f19; }
+    #proof-of-work::before { content: ""; position: absolute; z-index: 0; inset: 0; background-image: radial-gradient(rgba(16,185,129,.14) 1px, transparent 1px); background-size: 24px 24px; -webkit-mask-image: radial-gradient(ellipse at center, #000 0%, transparent 78%); mask-image: radial-gradient(ellipse at center, #000 0%, transparent 78%); pointer-events: none; }
+    .skills-ribbon { position: relative; z-index: 1; overflow: hidden; margin-bottom: 32px; }
+    .skills-ribbon::before, .skills-ribbon::after { content: ""; position: absolute; z-index: 1; left: 0; right: 0; height: 1px; background: linear-gradient(90deg, transparent, rgba(16,185,129,.4), transparent); pointer-events: none; }
+    .skills-ribbon::before { top: 0; }
+    .skills-ribbon::after { bottom: 0; }
+    .skills-ribbon-track { display: flex; width: max-content; animation: skills-ribbon-scroll 25s linear infinite; }
+    .skills-ribbon-group { display: flex; flex: none; align-items: center; gap: 18px; padding: 16px 24px; color: #d1fae5; font-size: 12px; font-weight: 600; letter-spacing: .12em; white-space: nowrap; }
+    .skills-ribbon-separator { color: #10b981; }
+    .skills-ribbon:hover .skills-ribbon-track { animation-play-state: paused; }
+    @keyframes skills-ribbon-scroll { to { transform: translateX(-50%); } }
+    .proof-card { position: relative; flex: 0 0 220px; height: 372px; display: grid; place-items: center; padding: 0; border: 0; border-radius: 10px; background: transparent; color: inherit; cursor: zoom-in; scroll-snap-align: center; opacity: .62; filter: brightness(.76); transform: translateY(10px) scale(.96); transition: opacity .25s ease, filter .25s ease, transform .25s ease; }
     .proof-card.is-active { position: relative; z-index: 1; opacity: 1; filter: brightness(1.08); transform: translateY(-4px) scale(1.035); }
     .proof-media-frame { position: relative; display: grid; height: 100%; aspect-ratio: 9 / 16; place-items: center; overflow: hidden; border: 1px solid #10b981; border-radius: 8px; background: #0b0f14; }
-    .proof-media-frame > img, .proof-media-frame > video { width: 100%; height: 100%; object-fit: contain; }
+    .proof-media-frame::after { content: ""; position: absolute; z-index: 3; inset: 0; padding: 1px; border-radius: inherit; background: radial-gradient(140px circle at var(--pointer-x,50%) var(--pointer-y,50%), rgba(16,185,129,.95), transparent 72%); -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0); -webkit-mask-composite: xor; mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0); mask-composite: exclude; opacity: 0; transition: opacity .2s ease; pointer-events: none; }
+    .proof-card.is-pointer-over .proof-media-frame::after, .proof-card:focus-visible .proof-media-frame::after { opacity: 1; }
+    .proof-media-frame > img, .proof-media-frame > video { width: 100%; height: 100%; object-fit: contain; transition: transform .45s ease; }
+    .proof-card:hover .proof-media-frame > img, .proof-card:hover .proof-media-frame > video { transform: scale(1.03); }
+    .proof-verified { position: absolute; z-index: 4; top: 12px; left: 12px; display: inline-flex; align-items: center; gap: 7px; padding: 7px 10px; border: 1px solid rgba(255,255,255,.2); border-radius: 999px; background: rgba(15,23,42,.62); color: #f0fdf4; font-size: 10px; font-weight: 600; line-height: 1; white-space: nowrap; backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); }
+    .proof-verified-dot { position: relative; width: 7px; height: 7px; border-radius: 50%; background: #10b981; box-shadow: 0 0 8px rgba(16,185,129,.8); }
+    .proof-verified-dot::after { content: ""; position: absolute; inset: -3px; border: 1px solid #10b981; border-radius: inherit; animation: verified-ping 1.8s cubic-bezier(0,0,.2,1) infinite; }
+    .proof-view-cue { position: absolute; z-index: 4; bottom: 12px; left: 50%; padding: 8px 12px; border: 1px solid rgba(255,255,255,.2); border-radius: 999px; background: rgba(15,23,42,.72); color: #f0fdf4; font-size: 11px; font-weight: 600; line-height: 1; white-space: nowrap; opacity: 0; transform: translate(-50%,8px); transition: opacity .2s ease, transform .2s ease; backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); }
+    .proof-card:hover .proof-view-cue, .proof-card:focus-visible .proof-view-cue { opacity: 1; transform: translate(-50%,0); }
+    @keyframes verified-ping { 75%, 100% { transform: scale(2.2); opacity: 0; } }
     @media (min-width: 1024px) {
       .proof-track { gap: 16px; padding-inline: max(24px, calc((100% - clamp(240px, 24vw, 320px)) / 2)); }
       .proof-card { flex: 0 0 clamp(240px, 24vw, 320px); height: auto; }
@@ -242,10 +262,20 @@
       inherits: false;
       initial-value: 0deg;
     }
+    @property --contact-border-angle {
+      syntax: "<angle>";
+      inherits: false;
+      initial-value: 0deg;
+    }
     .hero-intro-card { position: relative; isolation: isolate; padding: clamp(24px,5vw,48px); border: 1px solid transparent; border-radius: 12px; background: linear-gradient(#111827,#111827) padding-box, conic-gradient(from var(--hero-border-angle), rgba(16,185,129,.12), rgba(16,185,129,.2) 34%, #10b981 48%, rgba(16,185,129,.14) 62%, rgba(16,185,129,.12)) border-box; text-align: center; animation: hero-border-travel 9s linear infinite; transition: transform .25s ease, box-shadow .25s ease; }
     .hero-intro-card::before { content: ""; position: absolute; z-index: 0; top: -18%; left: -12%; width: clamp(240px,45vw,420px); aspect-ratio: 1; border-radius: 50%; background: radial-gradient(circle, rgba(45,212,191,.2) 0%, rgba(45,212,191,.12) 42%, transparent 72%); filter: blur(58px); pointer-events: none; animation: hero-orb-drift 10s ease-in-out infinite reverse; }
     .hero-intro-card > * { position: relative; z-index: 1; }
     .hero-intro-card:hover { transform: translateY(-3px); box-shadow: 0 18px 42px rgba(0,0,0,.32); }
+    .dark-band .contact-card { position: relative; isolation: isolate; overflow: hidden; border: 1px solid transparent; border-radius: 22px !important; background: linear-gradient(rgba(17,24,39,.76),rgba(17,24,39,.76)) padding-box, conic-gradient(from var(--contact-border-angle), rgba(16,185,129,.2), rgba(16,185,129,.42) 30%, rgba(45,212,191,.58) 48%, rgba(16,185,129,.2) 68%, rgba(16,185,129,.2)) border-box; box-shadow: 0 24px 80px rgba(0,0,0,.28); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); animation: contact-border-sheen 14s linear infinite; }
+    .dark-band .contact-card::before { content: ""; position: absolute; z-index: 0; inset: -45%; background: radial-gradient(ellipse at 32% 42%, rgba(16,185,129,.24), transparent 40%), radial-gradient(ellipse at 72% 58%, rgba(45,212,191,.2), transparent 38%); filter: blur(30px); pointer-events: none; animation: contact-mesh-drift 16s ease-in-out infinite alternate; }
+    .dark-band .contact-card > * { position: relative; z-index: 1; }
+    @keyframes contact-border-sheen { to { --contact-border-angle: 360deg; } }
+    @keyframes contact-mesh-drift { from { transform: translate3d(-2%,1%,0) scale(.96); } to { transform: translate3d(2%,-1%,0) scale(1.04); } }
     .hero-orb { position: absolute; z-index: 0; top: 4%; left: -26%; width: clamp(340px,100%,520px); aspect-ratio: 1; border-radius: 50%; background: radial-gradient(circle, rgba(16,185,129,.2) 0%, rgba(16,185,129,.12) 42%, transparent 72%); filter: blur(62px); animation: hero-orb-drift 9s ease-in-out infinite; }
     .portrait-card { z-index: 1; overflow: visible; }
     .portrait-card img { border-radius: inherit; }
@@ -383,6 +413,24 @@
     </section>
 
     <section id="proof-of-work" class="section-space dark-band">
+      <div class="skills-ribbon" role="region" aria-label="Skills and services">
+        <div class="skills-ribbon-track">
+          <div class="skills-ribbon-group">
+            <span>✦ AFFILIATE MARKETING</span><span class="skills-ribbon-separator">•</span>
+            <span>✦ GHOSTWRITING</span><span class="skills-ribbon-separator">•</span>
+            <span>✦ COPYWRITING</span><span class="skills-ribbon-separator">•</span>
+            <span>✦ CYBERFRIEND</span><span class="skills-ribbon-separator">•</span>
+            <span>✦ DIGITAL MENTORSHIP</span>
+          </div>
+          <div class="skills-ribbon-group" aria-hidden="true">
+            <span>✦ AFFILIATE MARKETING</span><span class="skills-ribbon-separator">•</span>
+            <span>✦ GHOSTWRITING</span><span class="skills-ribbon-separator">•</span>
+            <span>✦ COPYWRITING</span><span class="skills-ribbon-separator">•</span>
+            <span>✦ CYBERFRIEND</span><span class="skills-ribbon-separator">•</span>
+            <span>✦ DIGITAL MENTORSHIP</span>
+          </div>
+        </div>
+      </div>
       <div class="proof-section-wrap">
         <h2 class="section-title mb-8 text-center">Students Wins</h2>
         <div class="surface">
@@ -393,11 +441,11 @@
 
     <section id="contact" class="section-space dark-band">
       <div class="section-wrap">
-        <div class="surface reveal fade-only mx-auto flex max-w-3xl flex-col items-center gap-6 p-8 text-center md:p-12">
+        <div class="surface contact-card reveal fade-only mx-auto flex max-w-3xl flex-col items-center gap-6 p-8 text-center md:p-12">
           <a class="btn-primary" href="mailto:">
             Send an Email <i data-lucide="mail" class="h-4 w-4" aria-hidden="true"></i>
           </a>
-          <h2 class="section-title">Lets Create Something Valuable</h2>
+          <h2 class="section-title">Let's Create Something Valuable</h2>
         </div>
       </div>
     </section>
@@ -601,6 +649,8 @@
           ? `<video src="${safeHref(item.media)}" autoplay muted loop playsinline preload="metadata" aria-label="${escapeHTML(item.headline)}"></video>`
           : `<img src="${safeHref(item.media)}" alt="${escapeHTML(item.headline)}" loading="lazy">`;
         return `<button class="proof-card${index === 0 ? " is-active" : ""}" type="button" data-proof-index="${index}" aria-label="Open student win: ${escapeHTML(item.headline)}">
+          <span class="proof-verified"><span class="proof-verified-dot" aria-hidden="true"></span>Verified Win</span>
+          <span class="proof-view-cue" aria-hidden="true">View Proof ↗</span>
           <span class="proof-media-frame aspect-[9/16]">
             ${media}
             <span class="proof-media-fallback hidden" aria-hidden="true"></span>
@@ -673,6 +723,17 @@
 
       const proofTrack = $("#proof-grid");
       const proofCards = $$(".proof-card", proofTrack);
+      proofCards.forEach(card => {
+        const frame = $(".proof-media-frame", card);
+        card.addEventListener("pointermove", event => {
+          if (event.pointerType === "touch") return;
+          const bounds = frame.getBoundingClientRect();
+          frame.style.setProperty("--pointer-x", `${event.clientX - bounds.left}px`);
+          frame.style.setProperty("--pointer-y", `${event.clientY - bounds.top}px`);
+          card.classList.add("is-pointer-over");
+        });
+        card.addEventListener("pointerleave", () => card.classList.remove("is-pointer-over"));
+      });
       let proofScrollFrame = 0;
       const updateActiveProof = () => {
         proofScrollFrame = 0;
