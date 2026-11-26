@@ -110,6 +110,7 @@
     .proof-section-wrap { position: relative; z-index: 1; width: min(1640px,calc(100% - 48px)); margin-inline: auto; }
     #proof-of-work { position: relative; isolation: isolate; background-color: #0b0f19; }
     #proof-of-work::before { content: ""; position: absolute; z-index: 0; inset: 0; background-image: radial-gradient(rgba(16,185,129,.14) 1px, transparent 1px); background-size: 24px 24px; -webkit-mask-image: radial-gradient(ellipse at center, #000 0%, transparent 78%); mask-image: radial-gradient(ellipse at center, #000 0%, transparent 78%); pointer-events: none; }
+    #about.section-space { padding-block: 76px; }
     .skills-ribbon { position: relative; z-index: 1; overflow: hidden; margin-bottom: 32px; }
     .skills-ribbon::before, .skills-ribbon::after { content: ""; position: absolute; z-index: 1; left: 0; right: 0; height: 1px; background: linear-gradient(90deg, transparent, rgba(16,185,129,.4), transparent); pointer-events: none; }
     .skills-ribbon::before { top: 0; }
@@ -359,7 +360,10 @@
       .hero-grid > .reveal:not(.hero-intro-card), .hero-grid > .hero-intro-card { grid-column: 1; grid-row: auto; }
       .hero-grid > .reveal:not(.hero-intro-card) { justify-self: center; }
     }
-    @media (max-width: 640px) { .section-space { padding-block: 72px; } }
+    @media (max-width: 640px) {
+      .section-space { padding-block: 72px; }
+      #about.section-space { padding-block: 52px; }
+    }
   </style>
 </head>
 <body class="font-body">
@@ -408,7 +412,7 @@
 
     <section id="about" class="section-space dark-band">
       <div class="section-wrap max-w-4xl">
-        <div class="reveal fade-only mb-12 text-center">
+        <div class="reveal fade-only mb-8 text-center">
           <h2 id="about-title" class="section-title"></h2>
           <div class="mx-auto mt-6 h-1 w-12 bg-emerald-500"></div>
         </div>
