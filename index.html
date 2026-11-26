@@ -110,7 +110,7 @@
     .proof-section-wrap { position: relative; z-index: 1; width: min(1640px,calc(100% - 48px)); margin-inline: auto; }
     #proof-of-work { position: relative; isolation: isolate; background-color: #0b0f19; }
     #proof-of-work::before { content: ""; position: absolute; z-index: 0; inset: 0; background-image: radial-gradient(rgba(16,185,129,.14) 1px, transparent 1px); background-size: 24px 24px; -webkit-mask-image: radial-gradient(ellipse at center, #000 0%, transparent 78%); mask-image: radial-gradient(ellipse at center, #000 0%, transparent 78%); pointer-events: none; }
-    #about.section-space { padding-block: 76px; }
+    #about.section-space, #proof-of-work.section-space, #contact.section-space { padding-block: 76px; }
     .skills-ribbon { position: relative; z-index: 1; overflow: hidden; margin-bottom: 32px; }
     .skills-ribbon::before, .skills-ribbon::after { content: ""; position: absolute; z-index: 1; left: 0; right: 0; height: 1px; background: linear-gradient(90deg, transparent, rgba(16,185,129,.4), transparent); pointer-events: none; }
     .skills-ribbon::before { top: 0; }
@@ -362,7 +362,7 @@
     }
     @media (max-width: 640px) {
       .section-space { padding-block: 72px; }
-      #about.section-space { padding-block: 52px; }
+      #about.section-space, #proof-of-work.section-space, #contact.section-space { padding-block: 52px; }
     }
   </style>
 </head>
