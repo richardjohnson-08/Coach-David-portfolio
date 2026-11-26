@@ -249,6 +249,10 @@
     .typewriter-layout, .typewriter-visible { display: block; white-space: pre-line; }
     .typewriter-layout { visibility: hidden; }
     .typewriter-visible { position: absolute; inset: 0; }
+    .typewriter-target { position: relative; }
+    .expertise-list { list-style: none; padding-left: 0; }
+    .expertise-list li { position: relative; padding-left: 1.4rem; }
+    .expertise-list li::before { content: ""; position: absolute; top: .7em; left: 0; width: 7px; height: 7px; border-radius: 50%; background: #10b981; box-shadow: 0 0 12px rgba(16,185,129,.65); }
     @media (min-width: 768px) { #hero-headline { font-size: 1.25rem; } }
     .surface { border: 1px solid rgba(148,163,184,.15); border-radius: 8px !important; background: #111827; box-shadow: none; }
     .dark-band { background: #0b0f19; color: #f9fafb; }
@@ -406,8 +410,7 @@
           <div class="mx-auto mt-6 h-1 w-12 bg-emerald-500"></div>
         </div>
         <div class="surface reveal fade-only delay-100 space-y-5 p-8 text-base leading-relaxed text-gray-700 md:p-12 md:text-lg">
-          <p id="about-lead" class="text-2xl font-bold text-emerald-300"></p>
-          <div id="about-story" class="space-y-5"></div>
+          <ul id="about-story" class="expertise-list typewriter-sequence space-y-5"></ul>
           <div class="dark-band relative mt-8 border-l-4 border-amber-400 p-7 md:p-9">
             <p id="about-quote" class="relative z-10 text-lg italic leading-relaxed text-white md:text-xl"></p>
           </div>
@@ -493,13 +496,13 @@
         { value: "3,000+", label: "Students in training across Africa" }
       ],
       about: {
-        title: "Experience earned in the campaign trenches.",
-        lead: "Hi, ambitious affiliate marketer.",
+        title: "Area Of Expertise",
         quote: "A click is only the beginning. Sustainable growth comes from earning trust, guiding a good decision, and staying useful after the sale.",
         story: [
-          "My work began on the operator side: buying media, evaluating offers and learning what happens when a campaign meets real people. That experience taught me that a strong affiliate business is built on more than a clever hook or a temporary traffic advantage.",
-          "Over time, I moved from running individual campaigns to teaching the systems behind them. Today I work with marketers and partner teams to make offer selection, audience education, measurement and follow-up function as one coherent operating model.",
-          "My approach is deliberately durable: position offers honestly, acquire traffic with a clear view of its economics, then earn the next conversation through useful content and thoughtful retention. Compliance isn't a footnote — it's part of the strategy."
+          "Affiliate Marketing: Understanding digital products, developing market strategies, generating leads and converting prospects.",
+          "Digital Product Marketing: Understanding product positioning, identifying customer needs, developing market campaigns and communicating product value.",
+          "Sales and Human Psychology: Understanding consumer behaviour, purchasing decisions, sales, communication and the psychology behind successful sales.",
+          "Online Business Development: Understanding digital opportunities, marketing systems, customer acquisition and building structured online income streams."
         ],
       },
       proofResults: [
@@ -637,8 +640,10 @@
       $("#portrait-name").textContent = data.person.name;
       $("#portrait-role").textContent = data.person.role;
       $("#about-title").textContent = data.about.title;
-      $("#about-lead").textContent = data.about.lead;
-      $("#about-story").innerHTML = data.about.story.map(paragraph => `<p>${escapeHTML(paragraph)}</p>`).join("");
+      $("#about-story").innerHTML = data.about.story.map(item => `<li>${escapeHTML(item)}</li>`).join("");
+      $$("#about-story li").forEach((item, index) => {
+        setTypewriterText(item, data.about.story[index]);
+      });
       $("#about-quote").textContent = data.about.quote;
       const socialMarkup = data.person.social.map(item => {
         const label = item.label === "WhatsApp" ? "demo contact" : "demo profile";
@@ -673,7 +678,9 @@
     }
 
     function setupInteractions() {
-      const typewriterTargets = $$(".typewriter-target");
+      const allTypewriterTargets = $$(".typewriter-target");
+      const typewriterSequences = $$(".typewriter-sequence");
+      const typewriterTargets = allTypewriterTargets.filter(target => !target.closest(".typewriter-sequence"));
       function startTypewriter(element) {
         const output = $(".typewriter-visible", element);
         const text = element.dataset.typewriterText;
@@ -686,7 +693,7 @@
             character += 1;
             output.textContent = text.slice(0, character);
             if (character < text.length) {
-              window.setTimeout(typeNextCharacter, 36);
+              window.setTimeout(typeNextCharacter, 40);
             } else {
               output.classList.remove("typing-active");
               resolve();
@@ -694,6 +701,12 @@
           }
           typeNextCharacter();
         });
+      }
+      function startTypewriterSequence(sequence) {
+        return $$(".typewriter-target", sequence).reduce(
+          (pending, target) => pending.then(() => startTypewriter(target)),
+          Promise.resolve()
+        );
       }
       const proofLightbox = $("#proof-lightbox");
       const proofLightboxMedia = $("#proof-lightbox-media");
@@ -770,6 +783,8 @@
             if (entry.isIntersecting) {
               if (entry.target.matches(".typewriter-target")) {
                 startTypewriter(entry.target);
+              } else if (entry.target.matches(".typewriter-sequence")) {
+                startTypewriterSequence(entry.target);
               } else {
                 entry.target.classList.add("is-visible");
               }
@@ -777,10 +792,10 @@
             }
           });
         }, { threshold: .12 });
-        [...revealItems, ...typewriterTargets].forEach(item => observer.observe(item));
+        [...revealItems, ...typewriterTargets, ...typewriterSequences].forEach(item => observer.observe(item));
       } else {
         revealItems.forEach(item => item.classList.add("is-visible"));
-        typewriterTargets.forEach(item => {
+        allTypewriterTargets.forEach(item => {
           $(".typewriter-visible", item).textContent = item.dataset.typewriterText;
         });
       }
