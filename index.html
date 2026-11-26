@@ -126,12 +126,8 @@
     .proof-card.is-pointer-over .proof-media-frame::after, .proof-card:focus-visible .proof-media-frame::after { opacity: 1; }
     .proof-media-frame > img, .proof-media-frame > video { width: 100%; height: 100%; object-fit: contain; transition: transform .45s ease; }
     .proof-card:hover .proof-media-frame > img, .proof-card:hover .proof-media-frame > video { transform: scale(1.03); }
-    .proof-verified { position: absolute; z-index: 4; top: 12px; left: 12px; display: inline-flex; align-items: center; gap: 7px; padding: 7px 10px; border: 1px solid rgba(255,255,255,.2); border-radius: 999px; background: rgba(15,23,42,.62); color: #f0fdf4; font-size: 10px; font-weight: 600; line-height: 1; white-space: nowrap; backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); }
-    .proof-verified-dot { position: relative; width: 7px; height: 7px; border-radius: 50%; background: #10b981; box-shadow: 0 0 8px rgba(16,185,129,.8); }
-    .proof-verified-dot::after { content: ""; position: absolute; inset: -3px; border: 1px solid #10b981; border-radius: inherit; animation: verified-ping 1.8s cubic-bezier(0,0,.2,1) infinite; }
     .proof-view-cue { position: absolute; z-index: 4; bottom: 12px; left: 50%; padding: 8px 12px; border: 1px solid rgba(255,255,255,.2); border-radius: 999px; background: rgba(15,23,42,.72); color: #f0fdf4; font-size: 11px; font-weight: 600; line-height: 1; white-space: nowrap; opacity: 0; transform: translate(-50%,8px); transition: opacity .2s ease, transform .2s ease; backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); }
     .proof-card:hover .proof-view-cue, .proof-card:focus-visible .proof-view-cue { opacity: 1; transform: translate(-50%,0); }
-    @keyframes verified-ping { 75%, 100% { transform: scale(2.2); opacity: 0; } }
     @media (min-width: 1024px) {
       .proof-track { gap: 16px; padding-inline: max(24px, calc((100% - clamp(240px, 24vw, 320px)) / 2)); }
       .proof-card { flex: 0 0 clamp(240px, 24vw, 320px); height: auto; }
@@ -418,16 +414,12 @@
           <div class="skills-ribbon-group">
             <span>✦ AFFILIATE MARKETING</span><span class="skills-ribbon-separator">•</span>
             <span>✦ GHOSTWRITING</span><span class="skills-ribbon-separator">•</span>
-            <span>✦ COPYWRITING</span><span class="skills-ribbon-separator">•</span>
-            <span>✦ CYBERFRIEND</span><span class="skills-ribbon-separator">•</span>
-            <span>✦ DIGITAL MENTORSHIP</span>
+            <span>✦ DIGITAL ENTREPRENEUR</span>
           </div>
           <div class="skills-ribbon-group" aria-hidden="true">
             <span>✦ AFFILIATE MARKETING</span><span class="skills-ribbon-separator">•</span>
             <span>✦ GHOSTWRITING</span><span class="skills-ribbon-separator">•</span>
-            <span>✦ COPYWRITING</span><span class="skills-ribbon-separator">•</span>
-            <span>✦ CYBERFRIEND</span><span class="skills-ribbon-separator">•</span>
-            <span>✦ DIGITAL MENTORSHIP</span>
+            <span>✦ DIGITAL ENTREPRENEUR</span>
           </div>
         </div>
       </div>
@@ -649,7 +641,6 @@
           ? `<video src="${safeHref(item.media)}" autoplay muted loop playsinline preload="metadata" aria-label="${escapeHTML(item.headline)}"></video>`
           : `<img src="${safeHref(item.media)}" alt="${escapeHTML(item.headline)}" loading="lazy">`;
         return `<button class="proof-card${index === 0 ? " is-active" : ""}" type="button" data-proof-index="${index}" aria-label="Open student win: ${escapeHTML(item.headline)}">
-          <span class="proof-verified"><span class="proof-verified-dot" aria-hidden="true"></span>Verified Win</span>
           <span class="proof-view-cue" aria-hidden="true">View Proof ↗</span>
           <span class="proof-media-frame aspect-[9/16]">
             ${media}
